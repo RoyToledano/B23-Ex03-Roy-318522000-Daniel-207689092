@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Car : Vechile
+    internal class Car<T> : Vechile<T>
     {
         internal enum eColor
         {
