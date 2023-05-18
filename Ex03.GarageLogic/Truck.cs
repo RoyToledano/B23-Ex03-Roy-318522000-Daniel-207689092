@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Truck<T> : Vechile<T>
+    internal class Truck<T> : Engine<T>
     {
         // Data Members
         private bool m_IsContainToxicMaterial;

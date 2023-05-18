@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Motorcycle<T> : Vechile<T>
+    internal class Motorcycle<T> : Engine<T>
     {
         internal enum eLicenseType
         {
