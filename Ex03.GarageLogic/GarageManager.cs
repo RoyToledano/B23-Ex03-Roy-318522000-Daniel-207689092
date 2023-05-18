@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    class GarageManager
+    public class GarageManager
     {
     }
 }

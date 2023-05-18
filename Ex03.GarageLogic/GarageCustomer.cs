@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    class GarageCustomer
+    public class GarageCustomer
     {
     }
 }

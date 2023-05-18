@@ -3,7 +3,7 @@
 
 namespace Ex03.GarageLogic
 {
-    class Wheel
+    internal class Wheel
     {
     }
 }
