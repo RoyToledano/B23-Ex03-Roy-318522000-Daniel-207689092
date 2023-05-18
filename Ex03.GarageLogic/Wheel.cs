@@ -10,7 +10,10 @@ namespace Ex03.GarageLogic
         private float m_PressureStatus;
         private float m_MaximumPressure;
 
-        public bool inflateWheel(float i_AmountToAdd);
+        public bool inflateWheel(float i_AmountToAdd)
+        {
+            return true;
+        }
 
     }
 }
