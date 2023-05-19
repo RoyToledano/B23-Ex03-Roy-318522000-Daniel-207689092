@@ -4,6 +4,7 @@ namespace Ex03.GarageLogic
 {
     internal class Vechile
     {
+        //add defins to num of wheels in "Createwheels'"...
         private string m_ModelName;
         private string m_LicenseNumber;
         private float m_CapacityStatus;
@@ -20,6 +21,23 @@ namespace Ex03.GarageLogic
             {
                 m_Wheels = value;
             }
+        }
+
+        public void CreateWheelsByType(eVechilesTypes i_VechileType)
+        {
+            if (i_VechileType == eVechilesTypes.ElectricCar || i_VechileType == eVechilesTypes.FueledCar)
+            {
+                m_Wheels = new Wheel[5];
+            }
+            else if (i_VechileType == eVechilesTypes.ElectricMotorcycle || i_VechileType == eVechilesTypes.FueledMotorcycle)
+            {
+                m_Wheels = new Wheel[2];
+            }
+            else
+            {
+
+            }
+
         }
 
 
