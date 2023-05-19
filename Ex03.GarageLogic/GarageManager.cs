@@ -27,7 +27,7 @@ namespace Ex03.GarageLogic
             Customer customer = m_Customers[i_LicensePlate];
 
             customer.Vechile.UpdateBasicData(i_ModelName, i_CapacityStatus);
-            customer.Vechile.UpdateSpecificData(i_SpecificArguments, i_WheelArguments);
+            customer.Vechile.UpdateSpecificData(i_SpecificArguments, i_WheelArguments,i_EngineArguments);
             //find a way to make engine arguments added to the database
         }
     }

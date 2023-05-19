@@ -14,12 +14,14 @@ namespace Ex03.GarageLogic
         private eLicenseType m_LicenseType;
         private int m_EngineVolume;
 
-        public override void UpdateSpecificData(string[] i_Arguments, string[] i_WheelArguments)
+        public override void UpdateSpecificData(string[] i_Arguments, string[] i_WheelArguments, string[] i_EngineArguments)
         {
             m_Wheels = new Wheel[k_NumOfWheels];
             setWheelsData(i_WheelArguments[0], float.Parse(i_WheelArguments[1]), float.Parse(i_WheelArguments[2]));
             setLicenseTypeByName(i_Arguments[0]);
             m_EngineVolume = int.Parse(i_Arguments[1]);
+            m_Engine = new T();
+            callSetEngineData(m_Engine, i_EngineArguments);
         }
 
         private void setLicenseTypeByName(string i_LicenseTypeName)

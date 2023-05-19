@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Truck<T> : Engine<T>
+    internal class Truck<T> : Engine<T> where T : new()
     {
         const int k_NumOfWheels = 14;
         // Data Members
@@ -16,8 +16,10 @@ namespace Ex03.GarageLogic
             setWheelsData(i_WheelArguments[0], float.Parse(i_WheelArguments[1]), float.Parse(i_WheelArguments[2]));
             setIsContainToxicMaterial(i_Arguments[0]);
             m_CargoVolume = float.Parse(i_Arguments[1]);
-            m_Engine.
+            m_Engine = new T();
+            callSetEngineData(m_Engine,i_EngineArguments);
         }
+       
 
         private void setIsContainToxicMaterial(string i_IsContainToxicMaterial)
         {
