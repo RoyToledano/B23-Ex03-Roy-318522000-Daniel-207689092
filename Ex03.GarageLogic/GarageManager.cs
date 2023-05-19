@@ -4,45 +4,44 @@ using System.Runtime.InteropServices;
 
 namespace Ex03.GarageLogic
 {
+    public enum eVechilesTypes
+    {
+        FueledCar, FueledMotorcycle, FueledTruck, ElectricCar, ElectricMotorcycle
+    }
+
+   
+
     public class GarageManager
     {
-        public enum eVechilesTypes
-        {
-            FueledCar,FueledMotorcycle,FueledTruck,ElectricCar,ElectricMotorcycle
-        }
+        
 
         // Data Members:
         private Dictionary<string, Customer> m_Customers;
 
-        private void addNewCustomer(string i_CustomerName, string i_CustomerPhoneNumber,eVechilesTypes i_VechileType)
+        private void addNewCustomer(string i_CustomerName, string i_CustomerPhoneNumber, eVechilesTypes i_VechileType)
         {
             Customer customer = new Customer(i_CustomerName,i_CustomerPhoneNumber);
             Vechile vechile;
 
             switch (i_VechileType)
             {
-                case eVechilesTypes.FueledCar:
+                case eVechilesTypes.Car:
                     vechile = new Car<Fuel>();
                     customer.Vechile = vechile;
                     break;
-                case eVechilesTypes.FueledMotorcycle:
+                case eVechilesTypes.Motorcycle:
                     vechile = new Motorcycle<Fuel>();
                     customer.Vechile = vechile;
                     break;
-                case eVechilesTypes.FueledTruck:
+                case eVechilesTypes.Truck:
                     vechile = new Truck<Fuel>();
                     customer.Vechile = vechile;
                     break;
-                case eVechilesTypes.ElectricCar:
-                    vechile = new Car<Electric>();
-                    customer.Vechile = vechile;
-                    break;
-                case eVechilesTypes.ElectricMotorcycle:
-                    vechile = new Motorcycle<Electric>();
-                    customer.Vechile = vechile;
-                    break;
+                
             }
         }
+
+        private 
 
     }
 }
