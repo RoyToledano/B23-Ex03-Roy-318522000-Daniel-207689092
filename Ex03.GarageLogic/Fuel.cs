@@ -13,12 +13,6 @@ namespace Ex03.GarageLogic
         private float m_VolumeStatusInLiters;
         private float m_MaxVolumeInLiters;
 
-        public Fuel(string[] i_EngineArguments)
-        {
-            //to send an array of string
-            //SetEngineData();
-        }
-
         public void SetEngineData(string[] i_Arguments)
         {
             string fuelType = i_Arguments[0];

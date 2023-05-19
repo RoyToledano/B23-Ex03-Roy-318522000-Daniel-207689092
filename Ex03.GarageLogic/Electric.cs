@@ -9,12 +9,6 @@ namespace Ex03.GarageLogic
 
 
 
-        public Electric(string[] i_EngineArguments)
-        {
-            //to send an array of string
-            //SetEngineData();
-        }
-
         public void SetEngineData(string[] i_Arguments)
         {
             m_HoursLeftInBattery = float.Parse(i_Arguments[0]);
