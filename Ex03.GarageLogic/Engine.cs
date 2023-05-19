@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Engine<T> : Vechile
+    internal abstract class Engine<T> : Vechile where T : new()
     {
-        private T m_Engine;
+        protected T m_Engine = new T();
     }
 }

@@ -7,9 +7,23 @@ namespace Ex03.GarageLogic
         private float m_HoursLeftInBattery;
         private float m_MaxHoursInBattery;
 
-        private bool chargeBattery(float i_HoursToCharge)
+
+
+        public Electric(string[] i_EngineArguments)
         {
-            return false; // to implement
+            //to send an array of string
+            //SetEngineData();
+        }
+
+        public void SetEngineData(string[] i_Arguments)
+        {
+            m_HoursLeftInBattery = float.Parse(i_Arguments[0]);
+            m_MaxHoursInBattery = float.Parse(i_Arguments[1]);
+        }
+
+        public void chargeBattery(float i_HoursToCharge)
+        {
+            //to implement
         }
     }
 }
