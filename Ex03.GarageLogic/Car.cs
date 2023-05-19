@@ -2,13 +2,13 @@
 
 namespace Ex03.GarageLogic
 {
+    public enum eColor
+    {
+        White, Black, Yellow, Red
+    }
+
     internal class Car<T> : Engine<T> where T : new()
     {
-        internal enum eColor
-        {
-            White, Black, Yellow, Red
-        }
-
         const int k_NumOfWheels = 5;
         private eColor m_Color;
         private int m_NumOfDoors;
