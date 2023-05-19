@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
     {
         //add defins to num of wheels in "Createwheels'"...
         private string m_ModelName;
-        private string m_LicenseNumber;
+        private string m_LicensePlateNumber;
         private float m_CapacityStatus;
         private Wheel[] m_Wheels;
 
@@ -23,29 +23,35 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void CreateWheelsByType(eVechilesTypes i_VechileType)
+        public string LicensePlateNumber 
         {
-            if (i_VechileType == eVechilesTypes.ElectricCar || i_VechileType == eVechilesTypes.FueledCar)
+            get
             {
-                m_Wheels = new Wheel[5];
-            }
-            else if (i_VechileType == eVechilesTypes.ElectricMotorcycle || i_VechileType == eVechilesTypes.FueledMotorcycle)
-            {
-                m_Wheels = new Wheel[2];
-            }
-            else
-            {
-
+                return m_LicensePlateNumber;
             }
 
+            set
+            {
+                m_LicensePlateNumber = value;
+            }
         }
 
+        public float CapacityStatus
+        {
+            get
+            {
+                 return m_CapacityStatus;
+            }
 
-        public void updateData(string i_ModelName, string i_LicenseNumber,
-        float i_CapacityStatus, float i_WheelPressure)
+            set
+            {
+                m_CapacityStatus = value;
+            }
+        }
+
+        public void updateBasicData(string i_ModelName, float i_CapacityStatus, float i_WheelPressure)
         {
             m_ModelName = i_ModelName;
-            m_LicenseNumber = i_LicenseNumber;
             m_CapacityStatus = i_CapacityStatus;
         }
     }

@@ -7,6 +7,7 @@ namespace Ex03.GarageLogic
         // Data Members
         private bool m_IsContainToxicMaterial;
         private float m_CargoVolume;
+        
 
     }
 }
