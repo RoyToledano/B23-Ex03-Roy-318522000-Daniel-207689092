@@ -75,6 +75,7 @@ namespace Ex03.ConsoleUI
         public static eVechilesTypes ConvertVechileTypeToEnum(out eEngineTypes o_EngineType, int i_VechileChoice)
         {
             eVechilesTypes vechileType;
+
             switch (i_VechileChoice)
             {
                 case 1:
@@ -102,6 +103,29 @@ namespace Ex03.ConsoleUI
             return vechileType;
         }
 
+        public static eFuelType ConvertFuelTypeToEnum(int i_FuelTypeChoice)
+        {
+            eFuelType fuelType;
+
+            switch (i_FuelTypeChoice)
+            {
+                case 1:
+                    fuelType = eFuelType.Soler;
+                    break;
+                case 2:
+                    fuelType = eFuelType.Octan95;
+                    break;
+                case 3:
+                    fuelType = eFuelType.Octan96; ;
+                    break;
+                default:
+                    fuelType = eFuelType.Octan98;
+                    break;
+            }
+
+            return fuelType;
+        }
+
         public static float GetFloatNumber()
         {
             string strFloatNum=Console.ReadLine();
@@ -114,7 +138,6 @@ namespace Ex03.ConsoleUI
 
             return num;
         }
-
 
         public static string[] GetSpecificData(eVechilesTypes i_VechileType)
         {

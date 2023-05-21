@@ -43,8 +43,9 @@ namespace Ex03.ConsoleUI
         {
             string licensePlate, vechileDetails;
 
-            licensePlate = Utilities.GetNumberAsString(7, 8);
+            licensePlate = getLicenseNumber();
             vechileDetails = m_Garage.GetVechileDetailsAsString(licensePlate);
+            Console.WriteLine("\nVechile's info:");
             Console.WriteLine(vechileDetails);
 
         }
@@ -54,8 +55,8 @@ namespace Ex03.ConsoleUI
             string licensePlate;
             eVechilesTypes eVechileType;
             eEngineTypes eEngineType;
-            Console.WriteLine("Please enter licencse plate number, note that a valid license plate number is 7 or 8 digits long");
-            licensePlate = Utilities.GetNumberAsString(7, 8);
+            
+            licensePlate = getLicenseNumber();
             if (!m_Garage.IsCustomerExist(licensePlate))
             {
                 readCustomerData(licensePlate, out eVechileType, out eEngineType);
@@ -97,25 +98,56 @@ namespace Ex03.ConsoleUI
             m_Garage.SetVechileDataToCustomer(i_LicensePlate,modelName,engineCapacityStatus,vechileSpecificArguments,wheelsArguments,engineArguments);
         }
 
-        private string[] readEngineData(out float o_EngineCapacityStatus , eEngineTypes i_EngineType)
+        private string[] readEngineData(out float o_EngineCapacityStatus, eEngineTypes i_EngineType)
         {
-            float currentEngineLevel, maxEngineLevel;
-            string[] engineArgument = new string[2];
+            string[] engineArguments;
 
             if(i_EngineType == eEngineTypes.Fuel)
             {
-                Console.WriteLine("Please enter the fuel tank maximum capacity(in liters), press enter, and then enter the current fuel level(in liters)");
+                engineArguments = readFuelData(out o_EngineCapacityStatus);
             }
             else
             {
-                Console.WriteLine("Please enter the battery maximum capacity(in hours), press enter, and then enter the current battery level(in hours)");
+                engineArguments = readElectricData(out o_EngineCapacityStatus);
             }
 
+            return engineArguments;
+        }
+
+        private string[] readFuelData(out float o_EngineCapacityStatus)
+        {
+            float currentEngineLevel, maxEngineLevel;
+            string[] engineArgument = new string[3];
+            int fuelTypeChoice;
+            eFuelType fuelType;
+
+            printFuelTypes();
+            fuelTypeChoice = Utilities.GetSingleNumInRange(1, 4);
+            fuelType = Utilities.ConvertFuelTypeToEnum(fuelTypeChoice);
+            Console.WriteLine("Please enter the fuel tank maximum capacity");
             maxEngineLevel = Utilities.GetFloatNumber();
+            Console.WriteLine("Please enter the current fuel level(in liters)");
             currentEngineLevel = Utilities.GetFloatNumber();
-            engineArgument[0] = currentEngineLevel.ToString();
-            engineArgument[1] = maxEngineLevel.ToString();
+            engineArgument[0] = fuelType.ToString();
+            engineArgument[1] = currentEngineLevel.ToString();
+            engineArgument[2] = maxEngineLevel.ToString();
             o_EngineCapacityStatus = ((currentEngineLevel / maxEngineLevel) * 100);
+
+            return engineArgument;
+        }
+
+        private string[] readElectricData(out float o_EngineCapacityStatus)
+        {
+            float maxBatteryHours, currentBatteryHours;
+            string[] engineArgument = new string[2];
+
+            Console.WriteLine("Please enter the battery maximum capacity (in hours)");
+            maxBatteryHours = Utilities.GetFloatNumber();
+            Console.WriteLine("Pleas enter the amount of hours left in the battery");
+            currentBatteryHours = Utilities.GetFloatNumber();
+            engineArgument[0] = currentBatteryHours.ToString();
+            engineArgument[1] = maxBatteryHours.ToString();
+            o_EngineCapacityStatus = ((currentBatteryHours / maxBatteryHours) * 100);
             return engineArgument;
         }
 
@@ -130,9 +162,28 @@ namespace Ex03.ConsoleUI
             return wheelsArguments;
         }
 
+        private string getLicenseNumber()
+        {
+            string licensePlate;
+
+            Console.WriteLine("Please enter licencse plate number, note that a valid license plate number is 7 or 8 digits long");
+            licensePlate = Utilities.GetNumberAsString(7, 8);
+
+            return licensePlate;
+        }
+
+        private void printFuelTypes()
+        {
+            Console.WriteLine("Please enter the fuel type");
+            Console.WriteLine("1 - Soler");
+            Console.WriteLine("2 - Octan95");
+            Console.WriteLine("3 - Octan96");
+            Console.WriteLine("4 - Octan98");
+        }
+
         private void printVechileTypesMenu()
         {
-            Console.WriteLine("Please select the prefered option by typing its number");
+            Console.WriteLine("Please select the vechile type by typing its number");
             Console.WriteLine("1 - Fueled Car");
             Console.WriteLine("2 - Fueled Motorcycle");
             Console.WriteLine("3 - Fueled Truck");
