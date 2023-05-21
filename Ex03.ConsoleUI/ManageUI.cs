@@ -32,8 +32,21 @@ namespace Ex03.ConsoleUI
                 case 1:
                     manageDataReader();
                     break;
+                case 7:
+                    printFullVechileData();
+                    break;
                     //add cases
             }
+        }
+
+        private void printFullVechileData()
+        {
+            string licensePlate, vechileDetails;
+
+            licensePlate = Utilities.GetNumberAsString(7, 8);
+            vechileDetails = m_Garage.GetVechileDetailsAsString(licensePlate);
+            Console.WriteLine(vechileDetails);
+
         }
 
         private void manageDataReader()

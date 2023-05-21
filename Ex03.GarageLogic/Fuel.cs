@@ -8,10 +8,6 @@ namespace Ex03.GarageLogic
     }
     internal class Fuel : Engine
     {
-        public enum eFuelType
-        {
-            Soler, Octan95, Octan96, Octan98
-        }
 
         private eFuelType m_FuelType;
         private float m_VolumeStatusInLiters;
@@ -46,14 +42,31 @@ namespace Ex03.GarageLogic
         }
 
 
-        public void Refuel(GarageLogic.eFuelType i_FuelType, float i_AmountToFill)
+        public void Refuel(eFuelType i_FuelType, float i_AmountToFill)
         {
-           if (i_FuelType!=m_FuelType)
-            {
+            float sumOfFuels;
 
+           if (i_FuelType != m_FuelType)
+            {
+                throw new ArgumentException();
             }
+
+            sumOfFuels = i_AmountToFill + m_VolumeStatusInLiters;
+            if (sumOfFuels>m_MaxVolumeInLiters)
+            {
+                throw new ValueOutOfRangeException(0,m_MaxVolumeInLiters);
+            }
+
+            m_VolumeStatusInLiters= sumOfFuels;
         }
 
-        
+        public override string getEngineDetailsAsString()
+        {
+            string formattedStr;
+
+            formattedStr = string.Format("Fuel type is: {0}\nCurrent Volume: {1}\n", m_FuelType.ToString(), m_VolumeStatusInLiters);
+
+            return formattedStr;
+        }
     }
 }

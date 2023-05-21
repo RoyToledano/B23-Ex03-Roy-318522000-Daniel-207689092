@@ -49,7 +49,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="TruckDataReader.cs" />
     <Compile Include="Utilities.cs" />
-    <Compile Include="ValueOutOfRangeException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

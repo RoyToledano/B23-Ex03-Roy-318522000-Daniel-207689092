@@ -14,7 +14,7 @@ namespace Ex03.ConsoleUI
             {
                 if (!(num >= i_Start && num <= i_End))
                 {
-                    throw new ValueOutOfRangeException();
+                    throw new ValueOutOfRangeException(i_Start, i_End);
                 }
             }
             else
@@ -66,7 +66,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new ValueOutOfRangeException();
+                throw new ValueOutOfRangeException(i_MinNumOfDigits, i_MaxNumOfDigits);
             }
 
             return strNumber;

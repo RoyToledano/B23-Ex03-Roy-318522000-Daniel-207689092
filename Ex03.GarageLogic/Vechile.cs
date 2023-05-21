@@ -85,6 +85,17 @@ namespace Ex03.GarageLogic
                 m_Wheels[i].PressureStatus = i_CurrentWheelPressure;
             }
         }
+
+        public string getBasicVechileDetailsAsString()
+        {
+            string formattedStr;
+
+            formattedStr = string.Format("License plate number: {0}\nModel: {1}\n" +
+                "Capacity Status: {2}\n", m_LicensePlateNumber, m_ModelName, m_CapacityStatus);
+
+        }
+
+        public abstract string getSpecificVechileDetailsAsString();
     }
 
     

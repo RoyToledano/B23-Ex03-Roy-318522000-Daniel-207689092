@@ -32,5 +32,23 @@ namespace Ex03.GarageLogic
                 m_IsContainToxicMaterial = false;
             }    
         }
+
+        public override string getSpecificVechileDetailsAsString()
+        {
+            string formattedStr, isToxic;
+
+            if (m_IsContainToxicMaterial)
+            {
+                isToxic = "Yes";
+            }
+            else
+            {
+                isToxic = "No";
+            }
+
+            formattedStr = string.Format("Does the truck contain toxic material: {0}\nVargo Volume: {1} cc\n", isToxic, m_CargoVolume);
+
+            return formattedStr;
+        }
     }
 }

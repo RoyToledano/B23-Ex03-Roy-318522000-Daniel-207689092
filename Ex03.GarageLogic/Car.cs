@@ -45,5 +45,13 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public override string getSpecificVechileDetailsAsString()
+        {
+            string formattedStr;
+
+            formattedStr = string.Format("Car Color: {0}\nNum of Doors: {1}\n", m_Color.ToString(), m_NumOfDoors);
+
+            return formattedStr;
+        }
     }
 }

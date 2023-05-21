@@ -42,5 +42,14 @@ namespace Ex03.GarageLogic
                     break;
             }
         }
+
+        public override string getSpecificVechileDetailsAsString()
+        {
+            string formattedStr;
+
+            formattedStr = string.Format("License Type: {0}\nEngine Volume: {1} cc\n", m_LicenseType.ToString(), m_EngineVolume);
+
+            return formattedStr;
+        }
     }
 }

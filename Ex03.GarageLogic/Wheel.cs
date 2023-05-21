@@ -53,5 +53,14 @@ namespace Ex03.GarageLogic
             return true;
         }
 
+        public string getDetailsAsString()
+        {
+            string formattedStr;
+
+            formattedStr = string.Format("Manufacturer Name: {0}\nWheel Pressure: {1}\n", m_ManufacturerName, m_PressureStatus);
+
+            return formattedStr;
+        }
+
     }
 }

@@ -99,9 +99,42 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException();
             }
-
         }
 
-        
+        public void ChargeVechile(string i_LicensePlate, int i_MinutesToFill)
+        {
+            Customer customer;
+            Electric electric;
+            float hoursToFill;
+
+            customer = getCustomerByLicensePlate(i_LicensePlate);
+            electric = customer.Vechile.Engine as Electric;
+            if (electric != null)
+            {
+                hoursToFill = (float)i_MinutesToFill / (float)60;
+                electric.ChargeBattery(hoursToFill);
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public string GetVechileDetailsAsString(string i_LicensePlate)
+        {
+            Customer customer;
+            Vechile vechile;
+            string detailedVechileDataStr;
+
+            customer = getCustomerByLicensePlate(i_LicensePlate);
+            vechile = customer.Vechile;
+            detailedVechileDataStr = string.Format("Owner name: {0}\n", customer.NameOfOwner);
+
+            detailedVechileDataStr += vechile.getBasicVechileDetailsAsString() + vechile.Engine.getEngineDetailsAsString()
+                + vechile.getSpecificVechileDetailsAsString() + vechile.Wheels[0].getDetailsAsString();
+
+            return detailedVechileDataStr;
+
+        }
     }
 }

@@ -15,9 +15,26 @@ namespace Ex03.GarageLogic
             m_MaxHoursInBattery = float.Parse(i_Arguments[1]);
         }
 
-        public void chargeBattery(float i_HoursToCharge)
+        public void ChargeBattery(float i_HoursToCharge)
         {
-            //to implement
+            float sumOfBatteryHours;
+
+            sumOfBatteryHours = i_HoursToCharge + m_HoursLeftInBattery;
+            if (sumOfBatteryHours > m_MaxHoursInBattery)
+            {
+                throw new ValueOutOfRangeException(0, m_MaxHoursInBattery);
+            }
+
+            m_HoursLeftInBattery = sumOfBatteryHours;
+        }
+
+        public override string getEngineDetailsAsString()
+        {
+            string formattedStr;
+
+            formattedStr = string.Format("Current Volume: {0}\n", m_HoursLeftInBattery);
+
+            return formattedStr;
         }
     }
 }

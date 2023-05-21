@@ -13,6 +13,14 @@ namespace Ex03.GarageLogic
         private eVechileState m_VechileState;
         private Vechile m_Vechile = null;
 
+        internal string NameOfOwner
+        {
+            get
+            {
+                return m_NameOfOwner;
+            }
+        }
+
         internal Vechile Vechile
         {
             set

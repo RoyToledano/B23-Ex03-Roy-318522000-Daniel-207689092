@@ -10,5 +10,7 @@ namespace Ex03.GarageLogic
     {
 
         public abstract void SetEngineData(string[] i_Arguments);
+
+        public abstract string getEngineDetailsAsString();
     }
 }
