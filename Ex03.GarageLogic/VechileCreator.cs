@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Ex03.GarageLogic
 {
     public enum eVechilesTypes
     {
-        FueledCar, FueledMotorcycle, FueledTruck, ElectricCar, ElectricMotorcycle
+        Car, Motorcycle, Truck
+    }
+
+    public enum eEngineTypes
+    {
+        Fuel, Electric
+
     }
 
     class VechileCreator
@@ -18,25 +20,32 @@ namespace Ex03.GarageLogic
             Vechile vechile = null;
             switch (i_VechileType)
             {
-                case eVechilesTypes.FueledCar:
-                    vechile = new Car<Fuel>();
+                case eVechilesTypes.Car:
+                    vechile = new Car();
                     break;
-                case eVechilesTypes.FueledMotorcycle:
-                    vechile = new Motorcycle<Fuel>();
+                case eVechilesTypes.Motorcycle:
+                    vechile = new Motorcycle();
                     break;
-                case eVechilesTypes.FueledTruck:
-                    vechile = new Truck<Fuel>();
-                    break;
-                case eVechilesTypes.ElectricCar:
-                    vechile = new Car<Electric>();
-                    break;
-                case eVechilesTypes.ElectricMotorcycle:
-                    vechile = new Motorcycle<Electric>();
+                case eVechilesTypes.Truck:
+                    vechile = new Truck();
                     break;
             }
 
             vechile.LicensePlateNumber = i_LicenseNumber;
             return vechile;
+        }
+
+        public static void createNewEngine(Vechile i_Vechile, eEngineTypes i_EngineTypes)
+        {
+            if(i_EngineTypes == eEngineTypes.Fuel)
+            {
+                i_Vechile.Engine = new Fuel();
+            }
+            else
+            {
+                i_Vechile.Engine = new Electric();
+            }
+            
         }
     }
 }

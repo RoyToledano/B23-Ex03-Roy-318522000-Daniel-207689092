@@ -2,14 +2,14 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Electric
+    internal class Electric : Engine
     {
         private float m_HoursLeftInBattery;
         private float m_MaxHoursInBattery;
 
 
 
-        public void SetEngineData(string[] i_Arguments)
+        public override void SetEngineData(string[] i_Arguments)
         {
             m_HoursLeftInBattery = float.Parse(i_Arguments[0]);
             m_MaxHoursInBattery = float.Parse(i_Arguments[1]);

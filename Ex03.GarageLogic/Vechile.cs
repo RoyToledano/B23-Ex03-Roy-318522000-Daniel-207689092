@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -9,6 +11,7 @@ namespace Ex03.GarageLogic
         protected string m_LicensePlateNumber;
         protected float m_CapacityStatus;
         protected Wheel[] m_Wheels;
+        protected Engine m_Engine;
 
         public Wheel[] Wheels
         {
@@ -49,6 +52,19 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public Engine Engine
+        {
+            get
+            {
+                return m_Engine;
+            }
+
+            set
+            {
+                m_Engine = value;
+            }
+        }
+
         public void UpdateBasicData(string i_ModelName, float i_CapacityStatus)
         {
             m_ModelName = i_ModelName;
@@ -60,11 +76,13 @@ namespace Ex03.GarageLogic
         protected void setWheelsData(string i_ManufacturerName, float i_CurrentWheelPressure,
             float i_MaximumWheelPressure)
         {
-            foreach (Wheel wheel in m_Wheels)
+
+            for(int i = 0; i < m_Wheels.Length; i++)
             {
-                wheel.ManufacturerName = i_ManufacturerName;
-                wheel.MaximumPressure = i_MaximumWheelPressure;
-                wheel.PressureStatus = i_CurrentWheelPressure;
+                m_Wheels[i] = new Wheel();
+                m_Wheels[i].ManufacturerName = i_ManufacturerName;
+                m_Wheels[i].MaximumPressure = i_MaximumWheelPressure;
+                m_Wheels[i].PressureStatus = i_CurrentWheelPressure;
             }
         }
 

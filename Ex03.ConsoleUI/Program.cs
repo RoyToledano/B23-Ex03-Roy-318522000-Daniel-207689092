@@ -7,6 +7,7 @@ namespace Ex03.ConsoleUI
         public static void Main()
         {
             ManageUI GarageProgram=new ManageUI();
+            GarageProgram.StartProgram();
             Console.ReadKey();
         }
     }

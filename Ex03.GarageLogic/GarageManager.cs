@@ -13,10 +13,19 @@ namespace Ex03.GarageLogic
         // Data Members:
         private Dictionary<string, Customer> m_Customers;
 
-        public void AddNewCustomer(string i_CustomerName, string i_CustomerPhoneNumber, string i_LicensePlateNumber, eVechilesTypes i_VechileType)
+        public GarageManager()
+        {
+            m_Customers = new Dictionary<string, Customer>();
+        }
+
+
+        public void AddNewCustomer(string i_CustomerName, string i_CustomerPhoneNumber,
+                                   string i_LicensePlateNumber, eVechilesTypes i_VechileType,
+                                   eEngineTypes i_EngineTypes)
         {
             Customer customer = new Customer(i_CustomerName,i_CustomerPhoneNumber);
-            Vechile vechile= VechileCreator.GetVechileByType(i_VechileType, i_LicensePlateNumber);
+            Vechile vechile = VechileCreator.GetVechileByType(i_VechileType, i_LicensePlateNumber);
+            VechileCreator.createNewEngine(vechile, i_EngineTypes);
             customer.Vechile = vechile;
             m_Customers.Add(i_LicensePlateNumber,customer);
         }

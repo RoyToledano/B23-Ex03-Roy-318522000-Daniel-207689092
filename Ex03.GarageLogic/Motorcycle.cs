@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Motorcycle<T> : Engine<T> where T : new()
+    internal class Motorcycle : Vechile
     {
         internal enum eLicenseType
         {
@@ -20,8 +20,7 @@ namespace Ex03.GarageLogic
             setWheelsData(i_WheelArguments[0], float.Parse(i_WheelArguments[1]), float.Parse(i_WheelArguments[2]));
             setLicenseTypeByName(i_Arguments[0]);
             m_EngineVolume = int.Parse(i_Arguments[1]);
-            m_Engine = new T();
-            callSetEngineData(m_Engine, i_EngineArguments);
+            m_Engine.SetEngineData(i_EngineArguments);
         }
 
         private void setLicenseTypeByName(string i_LicenseTypeName)

@@ -72,25 +72,30 @@ namespace Ex03.ConsoleUI
             return strNumber;
         }
 
-        public static eVechilesTypes ConvertVechileTypeToEnum(int i_VechileChoice)
+        public static eVechilesTypes ConvertVechileTypeToEnum(out eEngineTypes o_EngineType, int i_VechileChoice)
         {
             eVechilesTypes vechileType;
             switch (i_VechileChoice)
             {
                 case 1:
-                    vechileType = eVechilesTypes.FueledCar;
+                    vechileType = eVechilesTypes.Car;
+                    o_EngineType = eEngineTypes.Fuel;
                     break;
                 case 2:
-                    vechileType = eVechilesTypes.FueledMotorcycle;
+                    vechileType = eVechilesTypes.Motorcycle;
+                    o_EngineType = eEngineTypes.Fuel;
                     break;
                 case 3:
-                    vechileType = eVechilesTypes.FueledTruck;
+                    vechileType = eVechilesTypes.Truck;
+                    o_EngineType = eEngineTypes.Fuel;
                     break;
                 case 4:
-                    vechileType = eVechilesTypes.ElectricCar;
+                    vechileType = eVechilesTypes.Car;
+                    o_EngineType = eEngineTypes.Electric;
                     break;
                 default:
-                    vechileType = eVechilesTypes.ElectricMotorcycle;
+                    vechileType = eVechilesTypes.Motorcycle;
+                    o_EngineType = eEngineTypes.Electric;
                     break;
             }
 
@@ -116,20 +121,20 @@ namespace Ex03.ConsoleUI
             DataReader readData;
             string[] specficArguments;
 
-            if (i_VechileType == eVechilesTypes.ElectricCar || i_VechileType == eVechilesTypes.FueledCar)
+            switch(i_VechileType)
             {
-                readData = new CarDataReader();
+                case eVechilesTypes.Car:
+                    readData = new CarDataReader();
+                    break;
+                case eVechilesTypes.Motorcycle:
+                    readData = new MotorcycleDataReader();
+                    break;
+                default:
+                    readData = new TruckDataReader();
+                    break;
             }
-            else if (i_VechileType == eVechilesTypes.ElectricMotorcycle || i_VechileType == eVechilesTypes.FueledMotorcycle)
-            {
-                readData = new MotorcycleDataReader();
-            }
-            else
-            {
-                readData = new TruckDataReader();
-            }
-            specficArguments=readData.GetSpecificData();
 
+            specficArguments=readData.GetSpecificData();
             return specficArguments;
         }
     }

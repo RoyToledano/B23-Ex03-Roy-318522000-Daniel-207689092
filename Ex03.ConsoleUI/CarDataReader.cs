@@ -13,7 +13,7 @@ namespace Ex03.ConsoleUI
             printColorMenu();
             colorChoice = Utilities.GetSingleNumInRange(1, 4);
             carArguments[0] = ConvertColorTypeToString(colorChoice);
-            Console.WriteLine("Please enter the num of doors in your vechile (2,3,4 or 5)");
+            Console.WriteLine("Please enter the number of doors in your vechile (2,3,4 or 5)");
             numOfDoors = Utilities.GetSingleNumInRange(2, 5);
             carArguments[1] = numOfDoors.ToString();
 
