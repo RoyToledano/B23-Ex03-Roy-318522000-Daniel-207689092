@@ -85,8 +85,6 @@ namespace Ex03.GarageLogic
                 m_Wheels[i].PressureStatus = i_CurrentWheelPressure;
             }
         }
-
-
     }
 
     

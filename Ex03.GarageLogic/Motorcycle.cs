@@ -2,13 +2,14 @@
 
 namespace Ex03.GarageLogic
 {
+    internal enum eLicenseType
+    {
+        A1, A2, AA, B1
+    }
+
     internal class Motorcycle : Vechile
     {
-        internal enum eLicenseType
-        {
-            A1, A2, AA, B1
-        }
-
+        const float k_MaxAirPressure = 31;
         const int k_NumOfWheels = 2;
         //data members
         private eLicenseType m_LicenseType;
@@ -17,7 +18,7 @@ namespace Ex03.GarageLogic
         public override void UpdateSpecificData(string[] i_Arguments, string[] i_WheelArguments, string[] i_EngineArguments)
         {
             m_Wheels = new Wheel[k_NumOfWheels];
-            setWheelsData(i_WheelArguments[0], float.Parse(i_WheelArguments[1]), float.Parse(i_WheelArguments[2]));
+            setWheelsData(i_WheelArguments[0], float.Parse(i_WheelArguments[1]), k_MaxAirPressure);
             setLicenseTypeByName(i_Arguments[0]);
             m_EngineVolume = int.Parse(i_Arguments[1]);
             m_Engine.SetEngineData(i_EngineArguments);

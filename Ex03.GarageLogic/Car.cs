@@ -11,6 +11,7 @@ namespace Ex03.GarageLogic
 
     internal class Car : Vechile
     {
+        const float k_MaxAirPressure = 33;
         const int k_NumOfWheels = 5;
         private eColor m_Color;
         private int m_NumOfDoors;
@@ -19,7 +20,7 @@ namespace Ex03.GarageLogic
         {
             m_Wheels = new Wheel[k_NumOfWheels];
 
-            setWheelsData(i_WheelArguments[0], float.Parse(i_WheelArguments[1]), float.Parse(i_WheelArguments[2]));
+            setWheelsData(i_WheelArguments[0], float.Parse(i_WheelArguments[1]), k_MaxAirPressure);
             setColorByName(i_Arguments[0]);
             m_NumOfDoors= int.Parse(i_Arguments[1]);
             m_Engine.SetEngineData(i_EngineArguments);

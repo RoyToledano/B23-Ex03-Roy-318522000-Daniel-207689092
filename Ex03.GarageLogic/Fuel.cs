@@ -2,9 +2,13 @@
 
 namespace Ex03.GarageLogic
 {
+    public enum eFuelType
+    {
+        Soler, Octan95, Octan96, Octan98
+    }
     internal class Fuel : Engine
     {
-        internal enum eFuelType
+        public enum eFuelType
         {
             Soler, Octan95, Octan96, Octan98
         }
@@ -41,9 +45,15 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public bool refuel(eFuelType i_FuelType, float i_LittersToFill)
+
+        public void Refuel(GarageLogic.eFuelType i_FuelType, float i_AmountToFill)
         {
-            return false; // to implement
+           if (i_FuelType!=m_FuelType)
+            {
+
+            }
         }
+
+        
     }
 }

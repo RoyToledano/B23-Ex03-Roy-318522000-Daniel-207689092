@@ -41,18 +41,25 @@ namespace Ex03.ConsoleUI
             string licensePlate;
             eVechilesTypes eVechileType;
             eEngineTypes eEngineType;
-            readCustomerData(out licensePlate, out eVechileType, out eEngineType);
-            readVechileData(licensePlate, eVechileType, eEngineType);
+            Console.WriteLine("Please enter licencse plate number, note that a valid license plate number is 7 or 8 digits long");
+            licensePlate = Utilities.GetNumberAsString(7, 8);
+            if (!m_Garage.IsCustomerExist(licensePlate))
+            {
+                readCustomerData(licensePlate, out eVechileType, out eEngineType);
+                readVechileData(licensePlate, eVechileType, eEngineType);
+            }
+            else
+            {
+                Console.WriteLine("This vechile is already registered. Now its status is updated to 'in repair'");
+            }
         }
 
-        private void readCustomerData(out string o_LicensePlate, out eVechilesTypes o_VechileType, out eEngineTypes o_EngineType)
+        private void readCustomerData(string i_LicensePlate, out eVechilesTypes o_VechileType, out eEngineTypes o_EngineType)
         {
             string customerName, customerPhoneNumber;
             int vechileTypeChoice;
-
-            Console.WriteLine("Please enter licencse plate number, note that a valid license plate number is 7 or 8 digits long");
-            o_LicensePlate = Utilities.GetNumberAsString(7, 8);
-            //call method to check if exists, if exists - no need to keep getting data but need to change status to "repaired"
+            
+            
             Console.WriteLine("Please enter your name");
             customerName = Utilities.GetAlphabeticString();
             Console.WriteLine("Please enter your phone number, note that a valid phone number is 9 or 10 digits long");
@@ -60,7 +67,7 @@ namespace Ex03.ConsoleUI
             printVechileTypesMenu();
             vechileTypeChoice = Utilities.GetSingleNumInRange(1, 5);
             o_VechileType = Utilities.ConvertVechileTypeToEnum(out o_EngineType, vechileTypeChoice);
-            m_Garage.AddNewCustomer(customerName, customerPhoneNumber, o_LicensePlate, o_VechileType, o_EngineType);
+            m_Garage.AddNewCustomer(customerName, customerPhoneNumber, i_LicensePlate, o_VechileType, o_EngineType);
         }
 
         private void readVechileData(string i_LicensePlate ,eVechilesTypes i_VechilesType, eEngineTypes i_EngineType)
@@ -101,14 +108,12 @@ namespace Ex03.ConsoleUI
 
         private string[] readWheelsData()
         {
-            string[] wheelsArguments = new string[3];
+            string[] wheelsArguments = new string[2];
 
             Console.WriteLine("Please enter wheels manufacture name");
             wheelsArguments[0] = Utilities.GetAlphabeticString();
             Console.WriteLine("Please enter wheels current air pressure");
             wheelsArguments[1] = Utilities.GetFloatNumber().ToString();
-            Console.WriteLine("Please enter wheels max air pressure");
-            wheelsArguments[2] = Utilities.GetFloatNumber().ToString();
             return wheelsArguments;
         }
 

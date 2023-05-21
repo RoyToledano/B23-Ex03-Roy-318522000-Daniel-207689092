@@ -2,13 +2,12 @@
 
 namespace Ex03.GarageLogic
 {
+    public enum eVechileState
+    {
+        InRepair, Repaired, Paid
+    }
     public class Customer
     {
-        internal enum eVechileState
-        {
-            InRepair, Repaired, Paid
-        }
-
         private string m_NameOfOwner;
         private string m_PhoneNumberOfOwner;
         private eVechileState m_VechileState;
@@ -27,12 +26,24 @@ namespace Ex03.GarageLogic
             }
         }
 
+        internal eVechileState VechileState
+        {
+            get
+            {
+                return m_VechileState;
+            }
+
+            set
+            {
+                m_VechileState = value;
+            }
+        }
 
         public Customer(string i_Name, string i_PhoneNumber)
         {
             m_NameOfOwner=i_Name;
             m_PhoneNumberOfOwner = i_PhoneNumber;
-            m_VechileState = eVechileState.InRepair;
+            VechileState = eVechileState.InRepair;
         }
     }
 }

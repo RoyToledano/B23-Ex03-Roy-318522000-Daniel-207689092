@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
 
     class VechileCreator
     {
-        public static Vechile GetVechileByType(eVechilesTypes i_VechileType, string i_LicenseNumber)
+        public static Vechile GetVechileByType(eVechilesTypes i_VechileType, string i_LicenseNumber, eEngineTypes i_EngineType)
         {
             Vechile vechile = null;
             switch (i_VechileType)
@@ -30,14 +30,14 @@ namespace Ex03.GarageLogic
                     vechile = new Truck();
                     break;
             }
-
+            setEngineByType(vechile, i_EngineType);
             vechile.LicensePlateNumber = i_LicenseNumber;
             return vechile;
         }
 
-        public static void createNewEngine(Vechile i_Vechile, eEngineTypes i_EngineTypes)
+        private static void setEngineByType(Vechile i_Vechile, eEngineTypes i_EngineType)
         {
-            if(i_EngineTypes == eEngineTypes.Fuel)
+            if(i_EngineType == eEngineTypes.Fuel)
             {
                 i_Vechile.Engine = new Fuel();
             }
@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic
             {
                 i_Vechile.Engine = new Electric();
             }
-            
+
         }
     }
 }
