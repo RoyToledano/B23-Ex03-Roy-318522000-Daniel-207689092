@@ -48,13 +48,13 @@ namespace Ex03.GarageLogic
 
            if (i_FuelType != m_FuelType)
             {
-                throw new ArgumentException();
+                throw new MyArgumentException();
             }
 
             sumOfFuels = i_AmountToFill + m_VolumeStatusInLiters;
             if (sumOfFuels>m_MaxVolumeInLiters)
             {
-                throw new ValueOutOfRangeException(0,m_MaxVolumeInLiters);
+                throw new Exceptions(0,m_MaxVolumeInLiters);
             }
 
             m_VolumeStatusInLiters= sumOfFuels;
@@ -64,7 +64,7 @@ namespace Ex03.GarageLogic
         {
             string formattedStr;
 
-            formattedStr = string.Format("Fuel type is: {0}\nCurrent Volume: {1}\n", m_FuelType.ToString(), m_VolumeStatusInLiters);
+            formattedStr = string.Format("Fuel type: {0}\nCurrent Volume: {1} liters\n", m_FuelType.ToString(), m_VolumeStatusInLiters);
 
             return formattedStr;
         }

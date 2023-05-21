@@ -91,7 +91,7 @@ namespace Ex03.GarageLogic
             string formattedStr;
 
             formattedStr = string.Format("License plate number: {0}\nModel: {1}\n" +
-                "Capacity Status: {2}\n", m_LicensePlateNumber, m_ModelName, m_CapacityStatus);
+                "Capacity Status: {2}%\n", m_LicensePlateNumber, m_ModelName, m_CapacityStatus);
 
             return formattedStr;
         }

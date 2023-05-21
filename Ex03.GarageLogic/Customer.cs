@@ -4,7 +4,7 @@ namespace Ex03.GarageLogic
 {
     public enum eVechileState
     {
-        InRepair, Repaired, Paid
+        Repairing, Repaired, Paid
     }
     public class Customer
     {
@@ -51,7 +51,7 @@ namespace Ex03.GarageLogic
         {
             m_NameOfOwner=i_Name;
             m_PhoneNumberOfOwner = i_PhoneNumber;
-            VechileState = eVechileState.InRepair;
+            VechileState = eVechileState.Repairing;
         }
     }
 }

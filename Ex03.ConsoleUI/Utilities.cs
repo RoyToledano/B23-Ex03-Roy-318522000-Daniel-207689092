@@ -14,12 +14,12 @@ namespace Ex03.ConsoleUI
             {
                 if (!(num >= i_Start && num <= i_End))
                 {
-                    throw new ValueOutOfRangeException(i_Start, i_End);
+                    throw new Exceptions(i_Start, i_End);
                 }
             }
             else
             {
-                throw new FormatException();
+                throw new MyFormatException();
             }
 
             return num;
@@ -34,7 +34,7 @@ namespace Ex03.ConsoleUI
             {
                 if ( (ch != ' ') && !char.IsLetter(ch))
                 {
-                    throw new FormatException();
+                    throw new MyFormatException();
                 }
                 else if (!v_isAlphaExist && char.IsLetter(ch))
                 {
@@ -43,7 +43,7 @@ namespace Ex03.ConsoleUI
             }
             if (!v_isAlphaExist)
             {
-                throw new FormatException();
+                throw new MyFormatException();
             }
 
             return str;
@@ -60,13 +60,13 @@ namespace Ex03.ConsoleUI
                 {
                     if (!char.IsDigit(ch))
                     {
-                        throw new FormatException();
+                        throw new MyFormatException();
                     }
                 }
             }
             else
             {
-                throw new ValueOutOfRangeException(i_MinNumOfDigits, i_MaxNumOfDigits);
+                throw new Exceptions(i_MinNumOfDigits, i_MaxNumOfDigits);
             }
 
             return strNumber;
@@ -126,6 +126,26 @@ namespace Ex03.ConsoleUI
             return fuelType;
         }
 
+        public static eVechileState ConvertVechileStatusToEnum(int i_VechileStateChoice)
+        {
+            eVechileState vechileState;
+
+            switch (i_VechileStateChoice)
+            {
+                case 1:
+                    vechileState = eVechileState.Repairing;
+                    break;
+                case 2:
+                    vechileState = eVechileState.Repaired;
+                    break;
+                default:
+                    vechileState = eVechileState.Paid;
+                    break;
+            }
+
+            return vechileState;
+        }
+
         public static float GetFloatNumber()
         {
             string strFloatNum=Console.ReadLine();
@@ -133,7 +153,7 @@ namespace Ex03.ConsoleUI
            
             if (!float.TryParse(strFloatNum,out num))
             {
-                throw new FormatException();
+                throw new MyFormatException();
             }
 
             return num;

@@ -4,12 +4,8 @@ using System.Runtime.InteropServices;
 
 namespace Ex03.GarageLogic
 {
-   
-
     public class GarageManager
     {
-        
-
         // Data Members:
         private Dictionary<string, Customer> m_Customers;
 
@@ -46,7 +42,7 @@ namespace Ex03.GarageLogic
 
             if (m_Customers.TryGetValue(i_LicensePlate,out customer))
             {
-                customer.VechileState = eVechileState.InRepair;
+                customer.VechileState = eVechileState.Repairing;
                 v_IsExist = true;
             }
 
@@ -78,7 +74,7 @@ namespace Ex03.GarageLogic
 
             if (!m_Customers.TryGetValue(i_LicensePlate, out customer))
             { 
-                throw new ArgumentException();
+                throw new MyArgumentException();
             }
 
             return customer;
@@ -97,7 +93,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException();
+                throw new MyArgumentException();
             }
         }
 
@@ -116,7 +112,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException();
+                throw new MyArgumentException();
             }
         }
 
@@ -128,7 +124,7 @@ namespace Ex03.GarageLogic
 
             customer = getCustomerByLicensePlate(i_LicensePlate);
             vechile = customer.Vechile;
-            detailedVechileDataStr = string.Format("Owner name: {0}\n", customer.NameOfOwner);
+            detailedVechileDataStr = string.Format("Owner name: {0}\nVechile state: {1}\n", customer.NameOfOwner,customer.VechileState.ToString());
 
             detailedVechileDataStr += vechile.getBasicVechileDetailsAsString() + vechile.Engine.getEngineDetailsAsString()
                 + vechile.getSpecificVechileDetailsAsString() + vechile.Wheels[0].getDetailsAsString();

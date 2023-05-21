@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
             sumOfBatteryHours = i_HoursToCharge + m_HoursLeftInBattery;
             if (sumOfBatteryHours > m_MaxHoursInBattery)
             {
-                throw new ValueOutOfRangeException(0, m_MaxHoursInBattery);
+                throw new Exceptions(0, m_MaxHoursInBattery);
             }
 
             m_HoursLeftInBattery = sumOfBatteryHours;
@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
         {
             string formattedStr;
 
-            formattedStr = string.Format("Current Volume: {0}\n", m_HoursLeftInBattery);
+            formattedStr = string.Format("Battery Status: {0} hours left\n", m_HoursLeftInBattery);
 
             return formattedStr;
         }
