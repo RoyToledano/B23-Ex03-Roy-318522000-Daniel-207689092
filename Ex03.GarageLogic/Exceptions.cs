@@ -39,7 +39,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return "This action is forbidden due to incompabaility of the argument with the procedure requested.";
+                return "Cannot execute this action to incompabaility of the argument with the procedure requested.";
             }
         }
     }

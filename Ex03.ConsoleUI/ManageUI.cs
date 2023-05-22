@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
+    enum eMenuOptions
+    {
+        AddCustomer=1,PrintLicensePlates,UpdateVechileState,InflateAllWheelsToMax, RefuelVechile, 
+        ChargeVechile,PrintFullVechileData, Exit
+    }
 
     public class ManageUI
     {
@@ -22,11 +28,13 @@ namespace Ex03.ConsoleUI
                 executeChoice(userChoice, ref v_IsRunning);
 
             }
+
+            Console.WriteLine("Thank you for using our garage");
         }
 
         private int manageUserChoice()
         {
-            int userChoice=8; //fix logic
+            int userChoice=(int)eMenuOptions.Exit;
             bool v_IsRunning = true;
 
             while (v_IsRunning)
@@ -47,149 +55,146 @@ namespace Ex03.ConsoleUI
 
         private void executeChoice(int i_Choice,ref bool io_IsRunning)
         {
-            string licensePlateNumber = getLicensePlateNumber();
-            switch (i_Choice)
-            {
-                case 1:
-                    manageDataReading(licensePlateNumber);
-                    break;
-                case 3:
-                    updateVechileState(licensePlateNumber);
-                    break;
-                case 4:
-                    inflateAllWheelsToMax(licensePlateNumber);
-                    break;
-                case 5:
-                    refuelVechile(licensePlateNumber);
-                    break;
-                case 6:
-                    chargeVechile(licensePlateNumber);
-                    break;
-
-                case 7:
-                    printFullVechileData(licensePlateNumber);
-                    break;
-                    //add cases
-            }
-        }
-
-        private void printFullVechileData(string i_LicensePlateNumber)
-        {
-            string vechileDetails=null;
-            bool v_IsRunning = true;
-
-            while (v_IsRunning)
+            string licensePlateNumber=null;
+            eMenuOptions choice = (eMenuOptions)i_Choice;
+            bool v_IsValidData = false;
+            
+            while (!v_IsValidData)
             {
                 try
                 {
-                    vechileDetails = m_Garage.GetVechileDetailsAsString(i_LicensePlateNumber);
-                    v_IsRunning = false;
-
+                    if (choice!=eMenuOptions.Exit && choice!=eMenuOptions.PrintLicensePlates)
+                    {
+                        licensePlateNumber = getLicensePlateNumber();
+                    }
+                    switch (choice)
+                    {
+                        case eMenuOptions.AddCustomer:
+                            readData(licensePlateNumber);
+                            break;
+                        case eMenuOptions.PrintLicensePlates:
+                            printVechilesLicensePlates();
+                            break;
+                        case eMenuOptions.UpdateVechileState:
+                            updateVechileState(licensePlateNumber);
+                            break;
+                        case eMenuOptions.InflateAllWheelsToMax:
+                            inflateAllWheelsToMax(licensePlateNumber);
+                            break;
+                        case eMenuOptions.RefuelVechile:
+                            refuelVechile(licensePlateNumber);
+                            break;
+                        case eMenuOptions.ChargeVechile:
+                            chargeVechile(licensePlateNumber);
+                            break;
+                        case eMenuOptions.PrintFullVechileData:
+                            printFullVechileData(licensePlateNumber);
+                            break;
+                        case eMenuOptions.Exit:
+                            io_IsRunning = false;
+                            break;
+                    }
+                    v_IsValidData = true;
                 }
+
                 catch (Exception i_Exception)
                 {
                     Console.WriteLine(i_Exception.Message + " Please Try Again\n");
                 }
             }
+            
+        }
 
+        private void printVechilesLicensePlates()
+        {
+            int userChoice;
+            bool v_IsFilter;
+            eVechileState? filterChoice = null;
+            List<string> licensePlates;
+            int i = 1;
+
+            Console.WriteLine("Please select the wanted filtering status by typing its number, or type 0 to show all license plates");
+            printVechileStatuses();
+            userChoice = Utilities.GetSingleNumInRange(0, 3);
+            if (userChoice==0)
+            {
+                v_IsFilter = false;
+            }
+            else
+            {
+                v_IsFilter = true;
+                filterChoice = Utilities.ConvertVechileStatusToEnum(userChoice);
+            }
+            licensePlates=m_Garage.GetVechilesLicensePlatesAsString(v_IsFilter, filterChoice);
+
+            if (licensePlates.Count>0)
+            {
+                Console.WriteLine("List of the matching license plates:");
+                foreach (string licensePlate in licensePlates)
+                {
+                    Console.WriteLine($"{i}. {licensePlate}");
+                    i++;
+                }
+            }
+            else
+            {
+                Console.WriteLine("No license plates found mathching this criteria");
+            }
+
+            Console.WriteLine();      
+        }
+
+        private void printFullVechileData(string i_LicensePlateNumber)
+        {
+            string vechileDetails=null;
+
+            vechileDetails = m_Garage.GetVechileDetailsAsString(i_LicensePlateNumber);
             Console.WriteLine("\nVechile's info:");
             Console.WriteLine(vechileDetails);
         }
 
         private void updateVechileState(string i_LicensePlate)
         {
-            bool v_IsRunning = true;
             int userChoice;
             eVechileState newState;
 
-            while (v_IsRunning)
-            {
-                try
-                {
-                    printVechileStatuses();
-                    userChoice =Utilities.GetSingleNumInRange(1, 3);
-                    newState = Utilities.ConvertVechileStatusToEnum(userChoice);
-                    m_Garage.UpdateVechileState(i_LicensePlate, newState);
-                    v_IsRunning = false;
-                }
-                catch (Exception i_Exception)
-                {
-                    Console.WriteLine(i_Exception.Message + " Please Try Again\n");
-                }
-            }
-
-
+            Console.WriteLine("Please select new status type for your vechile by typing its number");
+            printVechileStatuses();
+            userChoice =Utilities.GetSingleNumInRange(1, 3);
+            newState = Utilities.ConvertVechileStatusToEnum(userChoice);
+            m_Garage.UpdateVechileState(i_LicensePlate, newState);
         }
 
         private void inflateAllWheelsToMax(string i_LicensePlate)
         {
-            string vechileDetails = null;
-            bool v_IsRunning = true;
+           string vechileDetails = null;
 
-            while (v_IsRunning)
-            {
-                try
-                {
-                    m_Garage.InflateAllWheelsToMax(i_LicensePlate);
-                    v_IsRunning = false;
-                }
-                catch (Exception i_Exception)
-                {
-                    Console.WriteLine(i_Exception.Message + " Please Try Again\n");
-                }
-            }
-
-            Console.WriteLine("The air pressure for each wheel is set to maximum");
+           m_Garage.InflateAllWheelsToMax(i_LicensePlate);
+           Console.WriteLine("The air pressure for each wheel is set to maximum");
         }
 
         private void refuelVechile(string i_LicensePlate)
         {
-            bool v_IsRunning = true;
             float litersToFill;
             int userChoiceOfFuel;
             eFuelType fuelType;
 
-            while (v_IsRunning)
-            {
-                try
-                {
-                    printFuelTypes();
-                    userChoiceOfFuel = Utilities.GetSingleNumInRange(1, 4);
-                    fuelType = Utilities.ConvertFuelTypeToEnum(userChoiceOfFuel);
-                    Console.WriteLine("Please type the amount of liters you would like to fill");
-                    litersToFill = Utilities.GetFloatNumber();
-                    m_Garage.RefuelVechile(i_LicensePlate, fuelType, litersToFill);
-                    v_IsRunning = false;
-                }
-                catch (Exception i_Exception)
-                {
-                    Console.WriteLine(i_Exception.Message + " Please Try Again\n");
-                }
-            }
-
+            printFuelTypes();
+            userChoiceOfFuel = Utilities.GetSingleNumInRange(1, 4);
+            fuelType = Utilities.ConvertFuelTypeToEnum(userChoiceOfFuel);
+            Console.WriteLine("Please type the amount of liters you would like to fill");
+            litersToFill = Utilities.GetFloatNumber();
+            m_Garage.RefuelVechile(i_LicensePlate, fuelType, litersToFill);
             Console.WriteLine("The tank has been filled with the amount requested");
         }
 
         private void chargeVechile(string i_LicensePlate)
         {
-            bool v_IsRunning = true;
             int minutesToCharge;
 
-            while (v_IsRunning)
-            {
-                try
-                {
-                    Console.WriteLine("Please type the amount of minutes you would like to charge (as integer)");
-                    minutesToCharge = int.Parse(Utilities.GetNumberAsString(1,8)); //fix logic of how big can minutes be
-                    m_Garage.ChargeVechile(i_LicensePlate,minutesToCharge);
-                    v_IsRunning = false;
-                }
-                catch (Exception i_Exception)
-                {
-                    Console.WriteLine(i_Exception.Message + " Please Try Again\n");
-                }
-            }
-
+            Console.WriteLine("Please type the amount of minutes you would like to charge (as integer)");
+            minutesToCharge = int.Parse(Utilities.GetNumberAsString(1,8)); //fix logic of how big can minutes be
+            m_Garage.ChargeVechile(i_LicensePlate,minutesToCharge);
             Console.WriteLine("The battery has been charged with the amount of minutes requested");
         }
 
@@ -211,23 +216,6 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private void manageDataReading(string i_LicensePlateNumber)
-        {
-            bool v_IsRunning = true;
-
-            while (v_IsRunning)
-            {
-                try
-                {
-                    readData(i_LicensePlateNumber);
-                    v_IsRunning = false;
-                }
-                catch (Exception i_Exception)
-                {
-                    Console.WriteLine(i_Exception.Message + " Please Try Again\n");
-                }
-            }
-        }
 
         private void readCustomerData(string i_LicensePlate, out eVechilesTypes o_VechileType, out eEngineTypes o_EngineType)
         {
@@ -325,22 +313,10 @@ namespace Ex03.ConsoleUI
 
         private string getLicensePlateNumber()
         {
-            string licensePlate=null;
-            bool v_IsRunning = true;
+            string licensePlate;
 
-            while (v_IsRunning)
-            {
-                Console.WriteLine("Please enter licencse plate number, note that a valid license plate number is 7 or 8 digits long");
-                try
-                {
-                    licensePlate = Utilities.GetNumberAsString(7, 8);
-                    v_IsRunning = false;
-                }
-                catch (Exception i_Exception)
-                {
-                    Console.WriteLine(i_Exception.Message + " Please Try Again\n");
-                }
-            }
+            Console.WriteLine("Please enter licencse plate number, note that a valid license plate number is 7 or 8 digits long");
+            licensePlate = Utilities.GetNumberAsString(7, 8);
 
             return licensePlate;
         }
@@ -392,7 +368,6 @@ namespace Ex03.ConsoleUI
 
         private void printVechileStatuses()
         {
-            Console.WriteLine("Please select new status type for your vechile by typing its number");
             Console.WriteLine("1 - Repairing");
             Console.WriteLine("2 - Repaired");
             Console.WriteLine("3 - Paid");

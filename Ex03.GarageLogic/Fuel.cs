@@ -64,7 +64,7 @@ namespace Ex03.GarageLogic
         {
             string formattedStr;
 
-            formattedStr = string.Format("Fuel type: {0}\nCurrent Volume: {1} liters\n", m_FuelType.ToString(), m_VolumeStatusInLiters);
+            formattedStr = string.Format("Fuel type: {0}\nCurrent fuel volume: {1} liters\n", m_FuelType.ToString(), m_VolumeStatusInLiters);
 
             return formattedStr;
         }

@@ -124,13 +124,35 @@ namespace Ex03.GarageLogic
 
             customer = getCustomerByLicensePlate(i_LicensePlate);
             vechile = customer.Vechile;
-            detailedVechileDataStr = string.Format("Owner name: {0}\nVechile state: {1}\n", customer.NameOfOwner,customer.VechileState.ToString());
+            detailedVechileDataStr = string.Format("Owner name: {0}\nVechile repairing state: {1}\n", customer.NameOfOwner,customer.VechileState.ToString());
 
             detailedVechileDataStr += vechile.getBasicVechileDetailsAsString() + vechile.Engine.getEngineDetailsAsString()
                 + vechile.getSpecificVechileDetailsAsString() + vechile.Wheels[0].getDetailsAsString();
 
             return detailedVechileDataStr;
 
+        }
+
+        public List<string> GetVechilesLicensePlatesAsString(bool v_IsFilter, eVechileState? i_StatusToFilter)
+        {
+            List<string> licensePlates = new List<string>();
+
+            foreach (KeyValuePair<string,Customer> pair in m_Customers)
+            {
+                if (v_IsFilter)
+                {
+                    if (pair.Value.VechileState==i_StatusToFilter.Value)
+                    {
+                        licensePlates.Add(pair.Key);
+                    }
+                }
+                else
+                {
+                    licensePlates.Add(pair.Key);
+                } 
+            }
+
+            return licensePlates;
         }
     }
 }
