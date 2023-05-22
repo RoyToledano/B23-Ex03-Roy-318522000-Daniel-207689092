@@ -6,12 +6,20 @@ namespace Ex03.GarageLogic
     {
         Repairing, Repaired, Paid
     }
-    public class Customer
+    internal class Customer
     {
+        // Data Members:
         private string m_NameOfOwner;
         private string m_PhoneNumberOfOwner;
         private eVechileState m_VechileState;
         private Vechile m_Vechile = null;
+
+        public Customer(string i_Name, string i_PhoneNumber)
+        {
+            m_NameOfOwner = i_Name;
+            m_PhoneNumberOfOwner = i_PhoneNumber;
+            VechileState = eVechileState.Repairing;
+        }
 
         internal string NameOfOwner
         {
@@ -47,11 +55,5 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public Customer(string i_Name, string i_PhoneNumber)
-        {
-            m_NameOfOwner=i_Name;
-            m_PhoneNumberOfOwner = i_PhoneNumber;
-            VechileState = eVechileState.Repairing;
-        }
     }
 }

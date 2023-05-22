@@ -9,11 +9,14 @@ namespace Ex03.GarageLogic
 
     internal class Motorcycle : Vechile
     {
+        // Const Members:
         const float k_MaxAirPressure = 31;
         const int k_NumOfWheels = 2;
-        //data members
+
+        // Data Members:
         private eLicenseType m_LicenseType;
         private int m_EngineVolume;
+
 
         public override void UpdateSpecificData(string[] i_Arguments, string[] i_WheelArguments, string[] i_EngineArguments)
         {

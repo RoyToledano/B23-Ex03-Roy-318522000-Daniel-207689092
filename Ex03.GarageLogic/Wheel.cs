@@ -2,6 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
+
     internal class Wheel
     {
         // Data Members:
@@ -46,11 +47,6 @@ namespace Ex03.GarageLogic
             {
                 m_MaximumPressure = value;
             }
-        }
-
-        public bool inflateWheel(float i_AmountToAdd)
-        {
-            return true;
         }
 
         public string getDetailsAsString()

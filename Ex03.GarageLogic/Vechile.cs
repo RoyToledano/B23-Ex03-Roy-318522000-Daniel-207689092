@@ -1,12 +1,10 @@
-﻿
-
-using System.Collections.Generic;
+﻿using System;
 
 namespace Ex03.GarageLogic
 {
     internal abstract class Vechile 
     {
-        //add defins to num of wheels in "Createwheels'"...
+        // Data Members:
         protected string m_ModelName;
         protected string m_LicensePlateNumber;
         protected float m_CapacityStatus;
@@ -71,12 +69,13 @@ namespace Ex03.GarageLogic
             m_CapacityStatus = i_CapacityStatus;
         }
 
-        public abstract void UpdateSpecificData(string[] i_Arguments, string[] i_WheelArguments,string[] i_EngineArguments);
-
         protected void setWheelsData(string i_ManufacturerName, float i_CurrentWheelPressure,
             float i_MaximumWheelPressure)
         {
-
+            if(i_CurrentWheelPressure > i_MaximumWheelPressure)
+            {
+                throw new OwnArgumentException("wheel pressure");
+            }
             for(int i = 0; i < m_Wheels.Length; i++)
             {
                 m_Wheels[i] = new Wheel();
@@ -95,6 +94,9 @@ namespace Ex03.GarageLogic
 
             return formattedStr;
         }
+
+        // Abstrac Methods:
+        public abstract void UpdateSpecificData(string[] i_Arguments, string[] i_WheelArguments, string[] i_EngineArguments);
 
         public abstract string getSpecificVechileDetailsAsString();
     }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace Ex03.GarageLogic
 {
@@ -11,15 +9,17 @@ namespace Ex03.GarageLogic
 
     internal class Car : Vechile
     {
+        // Const Members:
         const float k_MaxAirPressure = 33;
         const int k_NumOfWheels = 5;
+
+        // Data Members:
         private eColor m_Color;
         private int m_NumOfDoors;
 
         public override void UpdateSpecificData(string[] i_Arguments, string[] i_WheelArguments, string[] i_EngineArguments)
         {
             m_Wheels = new Wheel[k_NumOfWheels];
-
             setWheelsData(i_WheelArguments[0], float.Parse(i_WheelArguments[1]), k_MaxAirPressure);
             setColorByName(i_Arguments[0]);
             m_NumOfDoors= int.Parse(i_Arguments[1]);

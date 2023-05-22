@@ -6,12 +6,30 @@ namespace Ex03.GarageLogic
     {
         Soler, Octan95, Octan96, Octan98
     }
+
+
     internal class Fuel : Engine
     {
 
         private eFuelType m_FuelType;
         private float m_VolumeStatusInLiters;
         private float m_MaxVolumeInLiters;
+
+        public float VolumeStatusInLiters
+        {
+            get
+            {
+                return m_VolumeStatusInLiters;
+            }
+        }
+
+        public float MaxVolumeInLiters
+        {
+            get
+            {
+                return m_MaxVolumeInLiters;
+            }
+        }
 
         public override void SetEngineData(string[] i_Arguments)
         {
@@ -41,20 +59,20 @@ namespace Ex03.GarageLogic
             }
         }
 
-
         public void Refuel(eFuelType i_FuelType, float i_AmountToFill)
         {
             float sumOfFuels;
+            float maxCurrentAmountToFill = m_MaxVolumeInLiters - m_VolumeStatusInLiters;
 
            if (i_FuelType != m_FuelType)
             {
-                throw new MyArgumentException();
+                throw new OwnArgumentException("fuel type");
             }
 
             sumOfFuels = i_AmountToFill + m_VolumeStatusInLiters;
             if (sumOfFuels>m_MaxVolumeInLiters)
             {
-                throw new Exceptions(0,m_MaxVolumeInLiters);
+                throw new ValueOutOfRangeException(0, maxCurrentAmountToFill);
             }
 
             m_VolumeStatusInLiters= sumOfFuels;

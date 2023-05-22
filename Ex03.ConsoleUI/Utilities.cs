@@ -14,12 +14,12 @@ namespace Ex03.ConsoleUI
             {
                 if (!(num >= i_Start && num <= i_End))
                 {
-                    throw new Exceptions(i_Start, i_End);
+                    throw new ValueOutOfRangeException(i_Start, i_End);
                 }
             }
             else
             {
-                throw new MyFormatException();
+                throw new OwnFormatException();
             }
 
             return num;
@@ -34,7 +34,7 @@ namespace Ex03.ConsoleUI
             {
                 if ( (ch != ' ') && !char.IsLetter(ch))
                 {
-                    throw new MyFormatException();
+                    throw new OwnFormatException();
                 }
                 else if (!v_isAlphaExist && char.IsLetter(ch))
                 {
@@ -43,7 +43,7 @@ namespace Ex03.ConsoleUI
             }
             if (!v_isAlphaExist)
             {
-                throw new MyFormatException();
+                throw new OwnFormatException();
             }
 
             return str;
@@ -54,19 +54,24 @@ namespace Ex03.ConsoleUI
             string strNumber=Console.ReadLine();
             int strLength = strNumber.Length;
 
+            if(strNumber == "Q") // in order to quit and get back to the main menu.
+            {
+                return strNumber;
+            }
+
             if (strLength >= i_MinNumOfDigits && strLength <= i_MaxNumOfDigits)
             {
                 foreach (char ch in strNumber)
                 {
                     if (!char.IsDigit(ch))
                     {
-                        throw new MyFormatException();
+                        throw new OwnFormatException();
                     }
                 }
             }
             else
             {
-                throw new Exceptions(i_MinNumOfDigits, i_MaxNumOfDigits);
+                throw new ValueOutOfRangeException(i_MinNumOfDigits, i_MaxNumOfDigits);
             }
 
             return strNumber;
@@ -153,7 +158,7 @@ namespace Ex03.ConsoleUI
            
             if (!float.TryParse(strFloatNum,out num))
             {
-                throw new MyFormatException();
+                throw new OwnFormatException();
             }
 
             return num;

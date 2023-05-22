@@ -2,11 +2,14 @@
 
 namespace Ex03.GarageLogic
 {
+   
     internal class Truck : Vechile
     {
+        // Const Members:
         const float k_MaxAirPressure = 26;
         const int k_NumOfWheels = 14;
-        // Data Members
+
+        // Data Members:
         private bool m_IsContainToxicMaterial;
         private float m_CargoVolume;
 
@@ -19,8 +22,7 @@ namespace Ex03.GarageLogic
             m_CargoVolume = float.Parse(i_Arguments[1]);
             m_Engine.SetEngineData(i_EngineArguments);
         }
-       
-
+        
         private void setIsContainToxicMaterial(string i_IsContainToxicMaterial)
         {
             if (i_IsContainToxicMaterial=="True")
