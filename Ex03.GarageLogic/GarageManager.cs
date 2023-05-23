@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
     /*  Arguments array explanation:
         In order to allow the option of add other vechiles to the system,
         the vechile's specific arguments (such as doors for cars or cargo volume for truck, etc.)
-        sent to the Garage Manager in a string array.
+        sent to the Garage Manager in Object array.
         The wheels and engine arguments are also sent in this way.
         All 3 arrays are being used in 'UpdateSpecificData' which is reimplemented in every vechile type class.
         Here are the array's details for each object:
@@ -49,8 +49,8 @@ namespace Ex03.GarageLogic
             m_Customers.Add(i_LicensePlateNumber,customer);
         }
 
-        public void SetVechileDataToCustomer(string i_LicensePlate, string i_ModelName,string[] i_SpecificArguments,
-            string[] i_WheelArguments, string[] i_EngineArguments)
+        public void SetVechileDataToCustomer(string i_LicensePlate, string i_ModelName, Object[] i_SpecificArguments,
+            Object[] i_WheelArguments, Object[] i_EngineArguments)
         {
             Customer customer = m_Customers[i_LicensePlate];
             float capacityStatus;

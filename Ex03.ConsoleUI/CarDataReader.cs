@@ -9,24 +9,24 @@ namespace Ex03.ConsoleUI
         const eFuelType k_CarFuelType = eFuelType.Octan95;
         const float k_MaxBatteryVolume = (float)5.2;
 
-        public override string[] GetSpecificData()
+        public override Object[] GetSpecificData()
         {
             int colorChoice, numOfDoors;
-            string[] carArguments = new string[2];
+            Object[] carArguments = new Object[2];
 
             printColorMenu();
             colorChoice = Utilities.GetSingleNumInRange(1, 4);
-            carArguments[0] = ConvertColorTypeToString(colorChoice);
+            carArguments[0] = ConvertColorTypeToEnum(colorChoice);
             Console.WriteLine("Please enter the number of doors in your vechile (2,3,4 or 5)");
             numOfDoors = Utilities.GetSingleNumInRange(2, 5);
-            carArguments[1] = numOfDoors.ToString();
+            carArguments[1] = numOfDoors;
 
             return carArguments;
         }
 
-        public override string[] GetEngineData(eEngineTypes i_EngineType)
+        public override Object[] GetEngineData(eEngineTypes i_EngineType)
         {
-            string[] engineArguments = null;
+            Object[] engineArguments = null;
 
             if (i_EngineType == eEngineTypes.Fuel)
             {
@@ -50,22 +50,22 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("4 - White");
         }
 
-        private static string ConvertColorTypeToString(int i_ColorChoice)
+        private static eColor ConvertColorTypeToEnum(int i_ColorChoice)
         {
-            string color;
+            eColor color;
             switch (i_ColorChoice)
             {
                 case 1:
-                    color = "Red";
+                    color = eColor.Red;
                     break;
                 case 2:
-                    color = "Black";
+                    color = eColor.Black;
                     break;
                 case 3:
-                    color = "Yellow";
+                    color = eColor.Yellow;
                     break;
                 default:
-                    color = "White";
+                    color = eColor.White;
                     break;
             }
 

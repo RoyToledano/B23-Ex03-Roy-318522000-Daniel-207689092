@@ -10,23 +10,23 @@ namespace Ex03.ConsoleUI
         const eFuelType k_MotorcycleFuelType = eFuelType.Octan98;
         const float k_MaxBatteryVolume = (float)2.6;
 
-        public override string[] GetSpecificData()
+        public override Object[] GetSpecificData()
         {
             int licenseTypeChoice;
-            string[] motorArguments = new string[2];
+            Object[] motorArguments = new Object[2];
 
             printLicenseTypeMenu();
             licenseTypeChoice = Utilities.GetSingleNumInRange(1, 4);
-            motorArguments[0] = ConvertLicenseTypeToString(licenseTypeChoice);
+            motorArguments[0] = ConvertLicenseTypeToEnum(licenseTypeChoice);
             Console.WriteLine("Please enter the volume capacity of the motor (in CC - Cubic Centimeters)");
-            motorArguments[1] = Utilities.GetNumberAsString(2, 5);
+            motorArguments[1] = Utilities.GetInteger();
 
             return motorArguments;
         }
 
-        public override string[] GetEngineData(eEngineTypes i_EngineType)
+        public override Object[] GetEngineData(eEngineTypes i_EngineType)
         {
-            string[] engineArguments = null;
+            Object[] engineArguments = null;
 
             if (i_EngineType == eEngineTypes.Fuel)
             {
@@ -49,22 +49,22 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("4 - B1");
         }
 
-        private static string ConvertLicenseTypeToString(int i_LicenseTypeChoice)
+        private static eLicenseType ConvertLicenseTypeToEnum(int i_LicenseTypeChoice)
         {
-            string licenseType;
+            eLicenseType licenseType;
             switch (i_LicenseTypeChoice)
             {
                 case 1:
-                    licenseType = "A1";
+                    licenseType = eLicenseType.A1;
                     break;
                 case 2:
-                    licenseType = "A2";
+                    licenseType = eLicenseType.A2;
                     break;
                 case 3:
-                    licenseType = "AA";
+                    licenseType = eLicenseType.AA;
                     break;
                 default:
-                    licenseType = "B1";
+                    licenseType = eLicenseType.B1;
                     break;
             }
 

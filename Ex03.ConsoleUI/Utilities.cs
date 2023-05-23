@@ -25,6 +25,19 @@ namespace Ex03.ConsoleUI
             return num;
         }
 
+        public static int GetInteger()
+        {
+            string strNum = Console.ReadLine();
+            int num;
+
+            if(!int.TryParse(strNum, out num))
+            {
+                throw new OwnFormatException();
+            }
+
+            return num;
+        }
+
         public static string GetAlphabeticString()
         {
             string str=Console.ReadLine();
@@ -165,10 +178,10 @@ namespace Ex03.ConsoleUI
         }
 
         // getting also engine detail in order to avoid another creation of DataReader.
-        public static string[] GetEngineAndVechileSpecificData(eVechilesTypes i_VechileType, eEngineTypes i_EngineType, ref string[] io_EngineArgumnts)
+        public static Object [] GetEngineAndVechileSpecificData(eVechilesTypes i_VechileType, eEngineTypes i_EngineType, ref Object[] io_EngineArgumnts)
         {
             DataReader readData;
-            string[] specficArguments;
+            Object[] specficArguments;
 
             switch(i_VechileType)
             {

@@ -150,7 +150,7 @@ namespace Ex03.ConsoleUI
         private void readVechileData(string i_LicensePlate, eVechilesTypes i_VechilesType, eEngineTypes i_EngineType)
         {
             string modelName;
-            string[] engineArguments = null, wheelsArguments = null, vechileSpecificArguments = null;
+            Object[] engineArguments = null, wheelsArguments = null, vechileSpecificArguments = null;
             float engineCapacityStatus;
             try
             {
@@ -169,14 +169,14 @@ namespace Ex03.ConsoleUI
         }
 
 
-        private string[] readWheelsData()
+        private Object[] readWheelsData()
         {
-            string[] wheelsArguments = new string[2];
+            Object[] wheelsArguments = new Object[2];
 
             Console.WriteLine("Please enter the wheels manufacturer name");
             wheelsArguments[0] = Utilities.GetAlphabeticString();
             Console.WriteLine("Please enter the wheels current air pressure");
-            wheelsArguments[1] = Utilities.GetFloatNumber().ToString();
+            wheelsArguments[1] = Utilities.GetFloatNumber();
             return wheelsArguments;
         }
 

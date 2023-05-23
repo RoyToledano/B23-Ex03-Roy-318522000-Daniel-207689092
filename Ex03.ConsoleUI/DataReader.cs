@@ -5,32 +5,32 @@ namespace Ex03.ConsoleUI
 {
     public abstract class DataReader
     {
-        public abstract string[] GetSpecificData();
+        public abstract Object[] GetSpecificData();
 
-        public abstract string[] GetEngineData(eEngineTypes i_EngineType);
+        public abstract Object[] GetEngineData(eEngineTypes i_EngineType);
 
-        protected string[] createFuelDataArray(eFuelType i_FuelType, float i_MaxFuelTank)
+        protected Object[] createFuelDataArray(eFuelType i_FuelType, float i_MaxFuelTank)
         {
-            string[] engineArguments = new string[3];
+            Object[] engineArguments = new Object[3];
             float currentTankVolume;
 
-            engineArguments[0] = i_FuelType.ToString();
-            engineArguments[1] = i_MaxFuelTank.ToString();
+            engineArguments[0] = i_FuelType;
+            engineArguments[1] = i_MaxFuelTank;
             Console.WriteLine("Please enter the current fuel status in liters");
             currentTankVolume = Utilities.GetFloatNumber();
-            engineArguments[2] = currentTankVolume.ToString();
+            engineArguments[2] = currentTankVolume;
             return engineArguments;
         }
 
-        protected string[] createElectricDataArray(float i_MaxBatteryVolume)
+        protected Object[] createElectricDataArray(float i_MaxBatteryVolume)
         {
-            string[] engineArguments = new string[2];
+            Object[] engineArguments = new Object[2];
             float currentBatteryHours;
 
-            engineArguments[0] = i_MaxBatteryVolume.ToString();
+            engineArguments[0] = i_MaxBatteryVolume;
             Console.WriteLine("Pleas enter the amount of hours left in the battery");
             currentBatteryHours = Utilities.GetFloatNumber();
-            engineArguments[1] = currentBatteryHours.ToString();
+            engineArguments[1] = currentBatteryHours;
             return engineArguments;
         }
     }

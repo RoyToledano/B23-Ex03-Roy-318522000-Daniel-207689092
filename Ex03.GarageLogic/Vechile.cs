@@ -96,7 +96,7 @@ namespace Ex03.GarageLogic
         }
 
         // Abstrac Methods:
-        public abstract void UpdateSpecificData(string[] i_Arguments, string[] i_WheelArguments, string[] i_EngineArguments);
+        public abstract void UpdateSpecificData(Object[] i_Arguments, Object[] i_WheelArguments, Object[] i_EngineArguments);
 
         public abstract string getSpecificVechileDetailsAsString();
     }

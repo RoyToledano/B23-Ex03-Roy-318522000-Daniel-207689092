@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    internal enum eLicenseType
+    public enum eLicenseType
     {
         A1, A2, AA, B1
     }
@@ -18,32 +18,13 @@ namespace Ex03.GarageLogic
         private int m_EngineVolume;
 
 
-        public override void UpdateSpecificData(string[] i_Arguments, string[] i_WheelArguments, string[] i_EngineArguments)
+        public override void UpdateSpecificData(Object[] i_Arguments, Object[] i_WheelArguments, Object[] i_EngineArguments)
         {
             m_Wheels = new Wheel[k_NumOfWheels];
-            setWheelsData(i_WheelArguments[0], float.Parse(i_WheelArguments[1]), k_MaxAirPressure);
-            setLicenseTypeByName(i_Arguments[0]);
-            m_EngineVolume = int.Parse(i_Arguments[1]);
+            setWheelsData((string)i_WheelArguments[0], (float)i_WheelArguments[1], k_MaxAirPressure);
+            m_LicenseType = ((eLicenseType)i_Arguments[0]);
+            m_EngineVolume = (int)i_Arguments[1];
             m_Engine.SetEngineData(i_EngineArguments);
-        }
-
-        private void setLicenseTypeByName(string i_LicenseTypeName)
-        {
-            switch (i_LicenseTypeName)
-            {
-                case "A1":
-                    m_LicenseType = eLicenseType.A1;
-                    break;
-                case "A2":
-                    m_LicenseType = eLicenseType.A2;
-                    break;
-                case "AA":
-                    m_LicenseType = eLicenseType.AA;
-                    break;
-                case "B1":
-                    m_LicenseType = eLicenseType.B1;
-                    break;
-            }
         }
 
         public override string getSpecificVechileDetailsAsString()

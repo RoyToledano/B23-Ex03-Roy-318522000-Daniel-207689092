@@ -25,10 +25,10 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void SetEngineData(string[] i_Arguments)
+        public override void SetEngineData(Object[] i_Arguments)
         {
-            m_MaxHoursInBattery = float.Parse(i_Arguments[0]);
-            m_HoursLeftInBattery = float.Parse(i_Arguments[1]);
+            m_MaxHoursInBattery = (float)i_Arguments[0];
+            m_HoursLeftInBattery = (float)i_Arguments[1];
         }
 
         internal void ChargeBattery(float i_HoursToCharge)
