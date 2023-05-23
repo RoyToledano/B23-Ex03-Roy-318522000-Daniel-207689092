@@ -1,9 +1,13 @@
 ﻿using System;
+using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
     class TruckDataReader : DataReader
     {
+        const float k_MaxFuelTank = 135;
+        const eFuelType k_TruckFuelType = eFuelType.Soler;
+
         public override string[] GetSpecificData()
         {
             int isToxic;
@@ -25,6 +29,22 @@ namespace Ex03.ConsoleUI
             truckArguments[1] = Utilities.GetFloatNumber().ToString();
 
             return truckArguments;
+        }
+
+        public override string[] GetEngineData(eEngineTypes i_EngineType)
+        {
+            string[] engineArguments = null;
+
+            if (i_EngineType == eEngineTypes.Fuel)
+            {
+                engineArguments = createFuelDataArray(k_TruckFuelType, k_MaxFuelTank);
+            }
+            else
+            {
+                throw new OwnArgumentException("electric truck");
+            }
+
+            return engineArguments;
         }
     }
 }

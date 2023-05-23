@@ -5,6 +5,10 @@ namespace Ex03.ConsoleUI
 {
     class CarDataReader : DataReader
     {
+        const float k_MaxFuelTank = 46;
+        const eFuelType k_CarFuelType = eFuelType.Octan95;
+        const float k_MaxBatteryVolume = (float)5.2;
+
         public override string[] GetSpecificData()
         {
             int colorChoice, numOfDoors;
@@ -19,6 +23,23 @@ namespace Ex03.ConsoleUI
 
             return carArguments;
         }
+
+        public override string[] GetEngineData(eEngineTypes i_EngineType)
+        {
+            string[] engineArguments = null;
+
+            if (i_EngineType == eEngineTypes.Fuel)
+            {
+                engineArguments = createFuelDataArray(k_CarFuelType, k_MaxFuelTank);
+            }
+            else
+            {
+                engineArguments = createElectricDataArray(k_MaxBatteryVolume);
+            }
+
+            return engineArguments;
+        }
+
 
         private void printColorMenu()
         {

@@ -13,12 +13,12 @@ namespace Ex03.GarageLogic
 
         Car:                                                       Fuel:
         [0] - Car's color.                                         [0] - The fuel's type.
-        [1] - Number of the car's doors.                           [1] - The current fuel tank's volume.
-                                                                   [2] - The maximum fuel tank's volume.
+        [1] - Number of the car's doors.                           [1] - The maximum fuel tank's volume.
+                                                                   [2] - The current fuel tank's volume.
         
         Motorcycle:                                                Electric:
-        [0] - Motorcycle's license type.                           [0] - The current battery hours left.
-        [1] - Motorcycle's engine volume.                          [1] - The maximum hours in the battery.
+        [0] - Motorcycle's license type.                           [0] - The maximum battery hours left.
+        [1] - Motorcycle's engine volume.                          [1] - The current hours in the battery.
         
         Truck:                                                     Fuel's given string arguments details:
         [0] - Has 'true' in charecters if the truck's              [0] - The wheel's manufacturer name.
@@ -49,21 +49,16 @@ namespace Ex03.GarageLogic
             m_Customers.Add(i_LicensePlateNumber,customer);
         }
 
-        public void SetVechileDataToCustomer(string i_LicensePlate, string i_ModelName,float i_CapacityStatus,string[] i_SpecificArguments,
+        public void SetVechileDataToCustomer(string i_LicensePlate, string i_ModelName,string[] i_SpecificArguments,
             string[] i_WheelArguments, string[] i_EngineArguments)
         {
             Customer customer = m_Customers[i_LicensePlate];
-            try
-            {
-                customer.Vechile.UpdateBasicData(i_ModelName, i_CapacityStatus);
-                customer.Vechile.UpdateSpecificData(i_SpecificArguments, i_WheelArguments, i_EngineArguments);
-            }
-            catch(Exception e)
-            {
-                m_Customers.Remove(i_LicensePlate);
-                throw; // throw this exception to the mangerUI.
-            }
-            
+            float capacityStatus;
+
+            // update specific before basic because 'capacityStatus' depends on the engine arguments.
+            customer.Vechile.UpdateSpecificData(i_SpecificArguments, i_WheelArguments, i_EngineArguments);
+            capacityStatus = customer.Vechile.Engine.GetEngineCapacityStatus();
+            customer.Vechile.UpdateBasicData(i_ModelName, capacityStatus);
         }
 
         public bool IsCustomerExist(string i_LicensePlate)
@@ -140,9 +135,7 @@ namespace Ex03.GarageLogic
             if (fuel!=null)
             {
                 fuel.Refuel(i_FuelType, i_AmountToFill);
-                currentEngineLevel = fuel.VolumeStatusInLiters;
-                maxEngineLevel = fuel.MaxVolumeInLiters;
-                customer.Vechile.CapacityStatus = ((currentEngineLevel / maxEngineLevel) * 100);
+                customer.Vechile.CapacityStatus = fuel.GetEngineCapacityStatus();
             }
             else
             {
@@ -165,9 +158,7 @@ namespace Ex03.GarageLogic
             {
                 hoursToFill = (float)i_MinutesToFill / (float)60;
                 electric.ChargeBattery(hoursToFill);
-                currentEngineLevel = electric.HoursLeftInBattery;
-                maxEngineLevel = electric.MaxHoursInBattery;
-                customer.Vechile.CapacityStatus = ((currentEngineLevel / maxEngineLevel) * 100);
+                customer.Vechile.CapacityStatus = electric.GetEngineCapacityStatus();
             }
             else
             {
@@ -196,6 +187,11 @@ namespace Ex03.GarageLogic
 
 
         // General method:
+        public void RemoveCustomerByLicensePlate(string i_LicensePlate)
+        {
+            m_Customers.Remove(i_LicensePlate);
+        }
+
         private Customer getCustomerByLicensePlate(string i_LicensePlate)
         {
             Customer customer;
@@ -207,6 +203,7 @@ namespace Ex03.GarageLogic
 
             return customer;
         }
+
 
     }
 }

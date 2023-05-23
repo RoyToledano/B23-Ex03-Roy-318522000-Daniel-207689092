@@ -27,8 +27,8 @@ namespace Ex03.GarageLogic
 
         public override void SetEngineData(string[] i_Arguments)
         {
-            m_HoursLeftInBattery = float.Parse(i_Arguments[0]);
-            m_MaxHoursInBattery = float.Parse(i_Arguments[1]);
+            m_MaxHoursInBattery = float.Parse(i_Arguments[0]);
+            m_HoursLeftInBattery = float.Parse(i_Arguments[1]);
         }
 
         internal void ChargeBattery(float i_HoursToCharge)
@@ -52,6 +52,11 @@ namespace Ex03.GarageLogic
             formattedStr = string.Format("Battery Status: {0} hours left\n", m_HoursLeftInBattery);
 
             return formattedStr;
+        }
+
+        public override float GetEngineCapacityStatus()
+        {
+            return ((m_HoursLeftInBattery / m_MaxHoursInBattery) * 100);
         }
     }
 }

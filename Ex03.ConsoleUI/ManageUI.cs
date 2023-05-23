@@ -113,10 +113,10 @@ namespace Ex03.ConsoleUI
         // Option #1 methods:
         private void readData(string i_LicensePlateNumber)
         {
-            string licensePlate;
+            string licensePlate = null;
             eVechilesTypes eVechileType;
             eEngineTypes eEngineType;
-
+            
             if (!m_Garage.IsCustomerExist(i_LicensePlateNumber))
             {
                 readCustomerData(i_LicensePlateNumber, out eVechileType, out eEngineType);
@@ -150,69 +150,24 @@ namespace Ex03.ConsoleUI
         private void readVechileData(string i_LicensePlate, eVechilesTypes i_VechilesType, eEngineTypes i_EngineType)
         {
             string modelName;
-            string[] engineArguments, wheelsArguments, vechileSpecificArguments;
+            string[] engineArguments = null, wheelsArguments = null, vechileSpecificArguments = null;
             float engineCapacityStatus;
-
-            Console.WriteLine("Please enter the vechile's model name");
-            modelName = Utilities.GetAlphabeticString();
-            engineArguments = readEngineData(out engineCapacityStatus, i_EngineType);
-            wheelsArguments = readWheelsData();
-            vechileSpecificArguments = Utilities.GetSpecificData(i_VechilesType);
-            m_Garage.SetVechileDataToCustomer(i_LicensePlate, modelName, engineCapacityStatus, vechileSpecificArguments, wheelsArguments, engineArguments);
-        }
-
-        private string[] readEngineData(out float o_EngineCapacityStatus, eEngineTypes i_EngineType)
-        {
-            string[] engineArguments;
-
-            if (i_EngineType == eEngineTypes.Fuel)
+            try
             {
-                engineArguments = readFuelData(out o_EngineCapacityStatus);
+                Console.WriteLine("Please enter the vechile's model name");
+                modelName = Utilities.GetAlphabeticString();
+                wheelsArguments = readWheelsData();
+                vechileSpecificArguments = Utilities.GetEngineAndVechileSpecificData(i_VechilesType, i_EngineType, ref engineArguments);
+                m_Garage.SetVechileDataToCustomer(i_LicensePlate, modelName, vechileSpecificArguments, wheelsArguments, engineArguments);
             }
-            else
+            catch (Exception i_Exception)
             {
-                engineArguments = readElectricData(out o_EngineCapacityStatus);
+                m_Garage.RemoveCustomerByLicensePlate(i_LicensePlate);
+                throw;
             }
 
-            return engineArguments;
         }
 
-        private string[] readFuelData(out float o_EngineCapacityStatus)
-        {
-            float currentEngineLevel, maxEngineLevel;
-            string[] engineArgument = new string[3];
-            int fuelTypeChoice;
-            eFuelType fuelType;
-
-            printFuelTypes();
-            fuelTypeChoice = Utilities.GetSingleNumInRange(1, 4);
-            fuelType = Utilities.ConvertFuelTypeToEnum(fuelTypeChoice);
-            Console.WriteLine("Please enter the maximum capacity of the fuel tank maximum in liters");
-            maxEngineLevel = Utilities.GetFloatNumber();
-            Console.WriteLine("Please enter the current fuel status in liters");
-            currentEngineLevel = Utilities.GetFloatNumber();
-            engineArgument[0] = fuelType.ToString();
-            engineArgument[1] = currentEngineLevel.ToString();
-            engineArgument[2] = maxEngineLevel.ToString();
-            o_EngineCapacityStatus = ((currentEngineLevel / maxEngineLevel) * 100);
-
-            return engineArgument;
-        }
-
-        private string[] readElectricData(out float o_EngineCapacityStatus)
-        {
-            float maxBatteryHours, currentBatteryHours;
-            string[] engineArgument = new string[2];
-
-            Console.WriteLine("Please enter the battery maximum capacity in hours");
-            maxBatteryHours = Utilities.GetFloatNumber();
-            Console.WriteLine("Pleas enter the amount of hours left in the battery");
-            currentBatteryHours = Utilities.GetFloatNumber();
-            engineArgument[0] = currentBatteryHours.ToString();
-            engineArgument[1] = maxBatteryHours.ToString();
-            o_EngineCapacityStatus = ((currentBatteryHours / maxBatteryHours) * 100);
-            return engineArgument;
-        }
 
         private string[] readWheelsData()
         {
@@ -370,11 +325,11 @@ namespace Ex03.ConsoleUI
         private void printVechileTypesMenu()
         {
             Console.WriteLine("Please select the vechile type by typing its number");
-            Console.WriteLine("1 - Fueled Car");
-            Console.WriteLine("2 - Fueled Motorcycle");
-            Console.WriteLine("3 - Fueled Truck");
-            Console.WriteLine("4 - Electric Car");
-            Console.WriteLine("5 - Electric Motorcycle");
+            Console.WriteLine("1 - Fueled Car - Fuel type: Octan95 | Tank size: 46 liters | Wheels max air pressure: 33");
+            Console.WriteLine("2 - Fueled Motorcycle - Fuel type: Octan98 | Tank size: 6.4 liters | Wheels max air pressure: 31");
+            Console.WriteLine("3 - Fueled Truck - Fuel type: Soler | Tank size: 135 liters | Wheels max air pressure: 26");
+            Console.WriteLine("4 - Electric Car - Battery size: 5.2 hours | Wheels max air pressure: 33");
+            Console.WriteLine("5 - Electric Motorcycle - Battery size: 2.6 hours | Wheels max air pressure: 33");
         }
 
         private void printWelcomeMessage()

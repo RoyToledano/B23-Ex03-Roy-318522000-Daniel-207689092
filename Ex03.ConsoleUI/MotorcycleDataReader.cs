@@ -1,9 +1,14 @@
 ﻿using System;
+using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
     class MotorcycleDataReader : DataReader
     {
+
+        const float k_MaxFuelTank = (float)6.4;
+        const eFuelType k_MotorcycleFuelType = eFuelType.Octan98;
+        const float k_MaxBatteryVolume = (float)2.6;
 
         public override string[] GetSpecificData()
         {
@@ -19,6 +24,21 @@ namespace Ex03.ConsoleUI
             return motorArguments;
         }
 
+        public override string[] GetEngineData(eEngineTypes i_EngineType)
+        {
+            string[] engineArguments = null;
+
+            if (i_EngineType == eEngineTypes.Fuel)
+            {
+                engineArguments = createFuelDataArray(k_MotorcycleFuelType, k_MaxFuelTank);
+            }
+            else
+            {
+                engineArguments = createElectricDataArray(k_MaxBatteryVolume);
+            }
+
+            return engineArguments;
+        }
 
         private void printLicenseTypeMenu()
         {

@@ -164,7 +164,8 @@ namespace Ex03.ConsoleUI
             return num;
         }
 
-        public static string[] GetSpecificData(eVechilesTypes i_VechileType)
+        // getting also engine detail in order to avoid another creation of DataReader.
+        public static string[] GetEngineAndVechileSpecificData(eVechilesTypes i_VechileType, eEngineTypes i_EngineType, ref string[] io_EngineArgumnts)
         {
             DataReader readData;
             string[] specficArguments;
@@ -182,6 +183,7 @@ namespace Ex03.ConsoleUI
                     break;
             }
 
+            io_EngineArgumnts = readData.GetEngineData(i_EngineType);
             specficArguments=readData.GetSpecificData();
             return specficArguments;
         }

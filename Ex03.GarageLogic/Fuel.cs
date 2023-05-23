@@ -36,8 +36,8 @@ namespace Ex03.GarageLogic
             string fuelType = i_Arguments[0];
 
             setFuelTypeByName(fuelType);
-            m_VolumeStatusInLiters = float.Parse(i_Arguments[1]);
-            m_MaxVolumeInLiters = float.Parse(i_Arguments[2]);
+            m_MaxVolumeInLiters = float.Parse(i_Arguments[1]);
+            m_VolumeStatusInLiters = float.Parse(i_Arguments[2]);
         }
 
         private void setFuelTypeByName(string i_FuelTypeName)
@@ -85,6 +85,11 @@ namespace Ex03.GarageLogic
             formattedStr = string.Format("Fuel type: {0}\nCurrent fuel volume: {1} liters\n", m_FuelType.ToString(), m_VolumeStatusInLiters);
 
             return formattedStr;
+        }
+
+        public override float GetEngineCapacityStatus()
+        {
+            return ((m_VolumeStatusInLiters / m_MaxVolumeInLiters) * 100);
         }
     }
 }
