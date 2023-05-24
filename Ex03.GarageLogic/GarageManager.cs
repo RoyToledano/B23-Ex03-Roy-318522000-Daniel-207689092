@@ -5,9 +5,11 @@ namespace Ex03.GarageLogic
 {
     /*
         Arguments array explanation:
-        In order to allow the option of add other vechiles to the system,
+        In order to make the garage extensible to other vechiles,
         the vechile's specific arguments (such as doors for cars or cargo volume for truck, etc.)
         sent to the Garage Manager in Object array.
+        With this implemention, for each new vechile there is only need to add class and decide
+        on the arguments that it will get as an object array.
         The wheels and engine arguments are also sent in this way.
         All 3 arrays are being used in 'UpdateSpecificData' which is reimplemented in every vechile type class.
         Here are the array's details for each object:
@@ -21,7 +23,7 @@ namespace Ex03.GarageLogic
         [0] - Motorcycle's license type.                           [0] - The maximum battery hours left.
         [1] - Motorcycle's engine volume.                          [1] - The current hours in the battery.
         
-        Truck:                                                     Fuel's given string arguments details:
+        Truck:                                                     Wheels:
         [0] - Has 'true' in charecters if the truck's              [0] - The wheel's manufacturer name.
         cargo contain toxic materials, has 'false' if not.         [1] - The wheel's current air pressure.
         [1] - Truck's cargo volume.                                [2] - The wheel's maximum air pressure.
