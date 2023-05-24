@@ -3,52 +3,11 @@ using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
-    class CarDataReader : DataReader
+    public class CarDataReader : DataReader
     {
-        const float k_MaxFuelTank = 46;
-        const eFuelType k_CarFuelType = eFuelType.Octan95;
-        const float k_MaxBatteryVolume = (float)5.2;
-
-        public override Object[] GetSpecificData()
-        {
-            int colorChoice, numOfDoors;
-            Object[] carArguments = new Object[2];
-
-            printColorMenu();
-            colorChoice = Utilities.GetSingleNumInRange(1, 4);
-            carArguments[0] = ConvertColorTypeToEnum(colorChoice);
-            Console.WriteLine("Please enter the number of doors in your vechile (2,3,4 or 5)");
-            numOfDoors = Utilities.GetSingleNumInRange(2, 5);
-            carArguments[1] = numOfDoors;
-
-            return carArguments;
-        }
-
-        public override Object[] GetEngineData(eEngineTypes i_EngineType)
-        {
-            Object[] engineArguments = null;
-
-            if (i_EngineType == eEngineTypes.Fuel)
-            {
-                engineArguments = createFuelDataArray(k_CarFuelType, k_MaxFuelTank);
-            }
-            else
-            {
-                engineArguments = createElectricDataArray(k_MaxBatteryVolume);
-            }
-
-            return engineArguments;
-        }
-
-
-        private void printColorMenu()
-        {
-            Console.WriteLine("Please select the prefered option by typing its number");
-            Console.WriteLine("1 - Red");
-            Console.WriteLine("2 - Black");
-            Console.WriteLine("3 - Yellow");
-            Console.WriteLine("4 - White");
-        }
+        private const float k_MaxFuelTank = 46;
+        private const eFuelType k_CarFuelType = eFuelType.Octan95;
+        private const float k_MaxBatteryVolume = 5.2f;
 
         private static eColor ConvertColorTypeToEnum(int i_ColorChoice)
         {
@@ -70,6 +29,46 @@ namespace Ex03.ConsoleUI
             }
 
             return color;
+        }
+
+        public override object[] GetSpecificData()
+        {
+            int colorChoice, numOfDoors;
+            object[] carArguments = new object[2];
+
+            printColorMenu();
+            colorChoice = Utilities.GetSingleNumInRange(1, 4);
+            carArguments[0] = ConvertColorTypeToEnum(colorChoice);
+            Console.WriteLine("Please enter the number of doors in your vechile (2,3,4 or 5)");
+            numOfDoors = Utilities.GetSingleNumInRange(2, 5);
+            carArguments[1] = numOfDoors;
+
+            return carArguments;
+        }
+
+        public override object[] GetEngineData(eEngineTypes i_EngineType)
+        {
+            object[] engineArguments = null;
+
+            if (i_EngineType == eEngineTypes.Fuel)
+            {
+                engineArguments = createFuelDataArray(k_CarFuelType, k_MaxFuelTank);
+            }
+            else
+            {
+                engineArguments = createElectricDataArray(k_MaxBatteryVolume);
+            }
+
+            return engineArguments;
+        }
+
+        private void printColorMenu()
+        {
+            Console.WriteLine("Please select the prefered option by typing its number");
+            Console.WriteLine("1 - Red");
+            Console.WriteLine("2 - Black");
+            Console.WriteLine("3 - Yellow");
+            Console.WriteLine("4 - White");
         }
     }
 }

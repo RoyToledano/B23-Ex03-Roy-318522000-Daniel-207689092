@@ -5,13 +5,13 @@ namespace Ex03.ConsoleUI
 {
     public abstract class DataReader
     {
-        public abstract Object[] GetSpecificData();
+        public abstract object[] GetSpecificData();
 
-        public abstract Object[] GetEngineData(eEngineTypes i_EngineType);
+        public abstract object[] GetEngineData(eEngineTypes i_EngineType);
 
-        protected Object[] createFuelDataArray(eFuelType i_FuelType, float i_MaxFuelTank)
+        protected object[] createFuelDataArray(eFuelType i_FuelType, float i_MaxFuelTank)
         {
-            Object[] engineArguments = new Object[3];
+            object[] engineArguments = new object[3];
             float currentTankVolume;
 
             engineArguments[0] = i_FuelType;
@@ -22,9 +22,9 @@ namespace Ex03.ConsoleUI
             return engineArguments;
         }
 
-        protected Object[] createElectricDataArray(float i_MaxBatteryVolume)
+        protected object[] createElectricDataArray(float i_MaxBatteryVolume)
         {
-            Object[] engineArguments = new Object[2];
+            object[] engineArguments = new object[2];
             float currentBatteryHours;
 
             engineArguments[0] = i_MaxBatteryVolume;

@@ -10,10 +10,9 @@ namespace Ex03.GarageLogic
     public enum eEngineTypes
     {
         Fuel, Electric
-
     }
 
-    class VechileCreator
+    internal class VechileCreator
     {
         public static Vechile GetVechileByType(eVechilesTypes i_VechileType, string i_LicenseNumber, eEngineTypes i_EngineType)
         {
@@ -30,6 +29,7 @@ namespace Ex03.GarageLogic
                     vechile = new Truck();
                     break;
             }
+
             setEngineByType(vechile, i_EngineType);
             vechile.LicensePlateNumber = i_LicenseNumber;
             return vechile;
@@ -45,7 +45,6 @@ namespace Ex03.GarageLogic
             {
                 i_Vechile.Engine = new Electric();
             }
-
         }
     }
 }

@@ -69,13 +69,13 @@ namespace Ex03.GarageLogic
             m_CapacityStatus = i_CapacityStatus;
         }
 
-        protected void setWheelsData(string i_ManufacturerName, float i_CurrentWheelPressure,
-            float i_MaximumWheelPressure)
+        protected void setWheelsData(string i_ManufacturerName, float i_CurrentWheelPressure, float i_MaximumWheelPressure)
         {
             if(i_CurrentWheelPressure > i_MaximumWheelPressure)
             {
                 throw new OwnArgumentException("wheel pressure");
             }
+
             for(int i = 0; i < m_Wheels.Length; i++)
             {
                 m_Wheels[i] = new Wheel();
@@ -89,17 +89,14 @@ namespace Ex03.GarageLogic
         {
             string formattedStr;
 
-            formattedStr = string.Format("License plate number: {0}\nModel: {1}\n" +
-                "Capacity Status: {2}%\n", m_LicensePlateNumber, m_ModelName, m_CapacityStatus);
+            formattedStr = string.Format("License plate number: {0}\nModel: {1}\n" + "Capacity Status: {2}%\n", m_LicensePlateNumber, m_ModelName, m_CapacityStatus);
 
             return formattedStr;
         }
 
         // Abstrac Methods:
-        public abstract void UpdateSpecificData(Object[] i_Arguments, Object[] i_WheelArguments, Object[] i_EngineArguments);
+        public abstract void UpdateSpecificData(object[] i_Arguments, object[] i_WheelArguments, object[] i_EngineArguments);
 
         public abstract string getSpecificVechileDetailsAsString();
     }
-
-    
 }

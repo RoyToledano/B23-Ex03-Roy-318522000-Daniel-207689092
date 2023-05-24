@@ -2,7 +2,6 @@
 
 namespace Ex03.GarageLogic
 {
-
     internal class Wheel
     {
         // Data Members:
@@ -53,10 +52,9 @@ namespace Ex03.GarageLogic
         {
             string formattedStr;
 
-            formattedStr = string.Format("Manufacturer Name: {0}\nWheel Pressure: {1}\n", m_ManufacturerName, m_PressureStatus);
+            formattedStr = string.Format("Wheel's Manufacturer Name: {0}\nWheel Pressure: {1}\n", m_ManufacturerName, m_PressureStatus);
 
             return formattedStr;
         }
-
     }
 }

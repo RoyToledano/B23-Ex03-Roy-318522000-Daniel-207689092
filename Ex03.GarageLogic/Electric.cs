@@ -2,7 +2,6 @@
 
 namespace Ex03.GarageLogic
 {
-
     internal class Electric : Engine
     {
         // Data Members:
@@ -25,7 +24,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public override void SetEngineData(Object[] i_Arguments)
+        public override void SetEngineData(object[] i_Arguments)
         {
             m_MaxHoursInBattery = (float)i_Arguments[0];
             m_HoursLeftInBattery = (float)i_Arguments[1];
@@ -39,7 +38,7 @@ namespace Ex03.GarageLogic
             sumOfBatteryHours = i_HoursToCharge + m_HoursLeftInBattery;
             if (sumOfBatteryHours > m_MaxHoursInBattery)
             {
-                throw new ValueOutOfRangeException(0, maxCurrentAmountToCharge);
+                throw new ValueOutOfRangeException(0, (maxCurrentAmountToCharge * 60.0f));
             }
 
             m_HoursLeftInBattery = sumOfBatteryHours;
@@ -49,14 +48,14 @@ namespace Ex03.GarageLogic
         {
             string formattedStr;
 
-            formattedStr = string.Format("Battery Status: {0} hours left\n", m_HoursLeftInBattery);
+            formattedStr = string.Format("Battery maximum capacity: {0} hours\nBattery Status: {1} hours left\n", m_MaxHoursInBattery, m_HoursLeftInBattery);
 
             return formattedStr;
         }
 
         public override float GetEngineCapacityStatus()
         {
-            return ((m_HoursLeftInBattery / m_MaxHoursInBattery) * 100);
+            return ((m_HoursLeftInBattery / m_MaxHoursInBattery) * 100.0f);
         }
     }
 }

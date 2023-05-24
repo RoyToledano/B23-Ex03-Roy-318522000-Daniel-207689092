@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
-    /*  Arguments array explanation:
+    /*
+        Arguments array explanation:
         In order to allow the option of add other vechiles to the system,
         the vechile's specific arguments (such as doors for cars or cargo volume for truck, etc.)
         sent to the Garage Manager in Object array.
@@ -32,25 +33,21 @@ namespace Ex03.GarageLogic
         // Data Members:
         private Dictionary<string, Customer> m_Customers;
 
-
         public GarageManager()
         {
             m_Customers = new Dictionary<string, Customer>();
         }
 
         // Option #1 methods:
-        public void AddNewCustomer(string i_CustomerName, string i_CustomerPhoneNumber,
-                                   string i_LicensePlateNumber, eVechilesTypes i_VechileType,
-                                   eEngineTypes i_EngineType)
+        public void AddNewCustomer(string i_CustomerName, string i_CustomerPhoneNumber, string i_LicensePlateNumber, eVechilesTypes i_VechileType, eEngineTypes i_EngineType)
         {
-            Customer customer = new Customer(i_CustomerName,i_CustomerPhoneNumber);
+            Customer customer = new Customer(i_CustomerName, i_CustomerPhoneNumber);
             Vechile vechile = VechileCreator.GetVechileByType(i_VechileType, i_LicensePlateNumber, i_EngineType);
             customer.Vechile = vechile;
-            m_Customers.Add(i_LicensePlateNumber,customer);
+            m_Customers.Add(i_LicensePlateNumber, customer);
         }
 
-        public void SetVechileDataToCustomer(string i_LicensePlate, string i_ModelName, Object[] i_SpecificArguments,
-            Object[] i_WheelArguments, Object[] i_EngineArguments)
+        public void SetVechileDataToCustomer(string i_LicensePlate, string i_ModelName, object[] i_SpecificArguments, object[] i_WheelArguments, object[] i_EngineArguments)
         {
             Customer customer = m_Customers[i_LicensePlate];
             float capacityStatus;
@@ -75,7 +72,6 @@ namespace Ex03.GarageLogic
             return v_IsExist;
         }
 
-
         // Option #2 method:
         public List<string> GetVechilesLicensePlatesAsString(bool v_IsFilter, eVechileState? i_StatusToFilter)
         {
@@ -99,7 +95,6 @@ namespace Ex03.GarageLogic
             return licensePlates;
         }
 
-
         // Option #3 method:
         public void UpdateVechileState(string i_LicensePlate, eVechileState i_WantedVechileState)
         {
@@ -108,7 +103,6 @@ namespace Ex03.GarageLogic
             customer = getCustomerByLicensePlate(i_LicensePlate);
             customer.VechileState = i_WantedVechileState;
         }
-
 
         // Option #4 method:
         public void InflateAllWheelsToMax(string i_LicensePlate)
@@ -122,17 +116,15 @@ namespace Ex03.GarageLogic
             } 
         }
 
-
         // Option #5 method:
         public void RefuelVechile(string i_LicensePlate, eFuelType i_FuelType, float i_AmountToFill)
         {
             Customer customer;
             Fuel fuel;
-            float currentEngineLevel, maxEngineLevel;
 
             customer = getCustomerByLicensePlate(i_LicensePlate);
             fuel = customer.Vechile.Engine as Fuel;
-            if (fuel!=null)
+            if (fuel != null)
             {
                 fuel.Refuel(i_FuelType, i_AmountToFill);
                 customer.Vechile.CapacityStatus = fuel.GetEngineCapacityStatus();
@@ -143,14 +135,12 @@ namespace Ex03.GarageLogic
             }
         }
 
-
         // Option #6 method:
         public void ChargeVechile(string i_LicensePlate, int i_MinutesToFill)
         {
             Customer customer;
             Electric electric;
             float hoursToFill;
-            float currentEngineLevel, maxEngineLevel;
 
             customer = getCustomerByLicensePlate(i_LicensePlate);
             electric = customer.Vechile.Engine as Electric;
@@ -166,7 +156,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-
         // Option #7 method:
         public string GetVechileDetailsAsString(string i_LicensePlate)
         {
@@ -176,15 +165,13 @@ namespace Ex03.GarageLogic
 
             customer = getCustomerByLicensePlate(i_LicensePlate);
             vechile = customer.Vechile;
-            detailedVechileDataStr = string.Format("Owner name: {0}\nVechile repairing state: {1}\n", customer.NameOfOwner,customer.VechileState.ToString());
+            detailedVechileDataStr = string.Format("Owner name: {0}\nVechile repairing state: {1}\n", customer.NameOfOwner, customer.VechileState.ToString());
 
             detailedVechileDataStr += vechile.getBasicVechileDetailsAsString() + vechile.Engine.getEngineDetailsAsString()
                 + vechile.getSpecificVechileDetailsAsString() + vechile.Wheels[0].getDetailsAsString();
 
             return detailedVechileDataStr;
-
         }
-
 
         // General method:
         public void RemoveCustomerByLicensePlate(string i_LicensePlate)
@@ -203,7 +190,5 @@ namespace Ex03.GarageLogic
 
             return customer;
         }
-
-
     }
 }

@@ -10,11 +10,12 @@ namespace Ex03.GarageLogic
         {
             m_WrongArgument = i_WorngArgument;
         }
+
         public override string Message
         {
             get
             {
-                return "Cannot execute this action to incompabaility of the "+ m_WrongArgument +" with the procedure requested.";
+                return "Cannot execute this action to incompabaility of the " + m_WrongArgument + " with the procedure requested.";
             }
         }
     }

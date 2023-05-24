@@ -10,7 +10,7 @@ namespace Ex03.ConsoleUI
             string strNum = Console.ReadLine();
             int num;
 
-            if (int.TryParse(strNum,out num))
+            if (int.TryParse(strNum, out num))
             {
                 if (!(num >= i_Start && num <= i_End))
                 {
@@ -40,12 +40,12 @@ namespace Ex03.ConsoleUI
 
         public static string GetAlphabeticString()
         {
-            string str=Console.ReadLine();
+            string str = Console.ReadLine();
             bool v_isAlphaExist = false; //to make sure that a blank string won't be accepted
 
             foreach (char ch in str)
             {
-                if ( (ch != ' ') && !char.IsLetter(ch))
+                if ((ch != ' ') && !char.IsLetter(ch))
                 {
                     throw new OwnFormatException();
                 }
@@ -54,6 +54,7 @@ namespace Ex03.ConsoleUI
                     v_isAlphaExist = true;
                 }
             }
+
             if (!v_isAlphaExist)
             {
                 throw new OwnFormatException();
@@ -62,9 +63,9 @@ namespace Ex03.ConsoleUI
             return str;
         }
 
-        public static string GetNumberAsString(int i_MinNumOfDigits,int i_MaxNumOfDigits)
+        public static string GetNumberAsString(int i_MinNumOfDigits, int i_MaxNumOfDigits)
         {
-            string strNumber=Console.ReadLine();
+            string strNumber = Console.ReadLine();
             int strLength = strNumber.Length;
 
             if(strNumber == "Q") // in order to quit and get back to the main menu.
@@ -134,7 +135,7 @@ namespace Ex03.ConsoleUI
                     fuelType = eFuelType.Octan95;
                     break;
                 case 3:
-                    fuelType = eFuelType.Octan96; ;
+                    fuelType = eFuelType.Octan96;
                     break;
                 default:
                     fuelType = eFuelType.Octan98;
@@ -166,10 +167,10 @@ namespace Ex03.ConsoleUI
 
         public static float GetFloatNumber()
         {
-            string strFloatNum=Console.ReadLine();
+            string strFloatNum = Console.ReadLine();
             float num;
            
-            if (!float.TryParse(strFloatNum,out num))
+            if (!float.TryParse(strFloatNum, out num))
             {
                 throw new OwnFormatException();
             }
@@ -178,10 +179,10 @@ namespace Ex03.ConsoleUI
         }
 
         // getting also engine detail in order to avoid another creation of DataReader.
-        public static Object [] GetEngineAndVechileSpecificData(eVechilesTypes i_VechileType, eEngineTypes i_EngineType, ref Object[] io_EngineArgumnts)
+        public static object[] GetEngineAndVechileSpecificData(eVechilesTypes i_VechileType, eEngineTypes i_EngineType, ref object[] io_EngineArgumnts)
         {
             DataReader readData;
-            Object[] specficArguments;
+            object[] specficArguments;
 
             switch(i_VechileType)
             {
@@ -197,9 +198,8 @@ namespace Ex03.ConsoleUI
             }
 
             io_EngineArgumnts = readData.GetEngineData(i_EngineType);
-            specficArguments=readData.GetSpecificData();
+            specficArguments = readData.GetSpecificData();
             return specficArguments;
         }
     }
-
 }

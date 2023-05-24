@@ -6,11 +6,12 @@ namespace Ex03.GarageLogic
     {
         Repairing, Repaired, Paid
     }
+
     internal class Customer
     {
         // Data Members:
-        private string m_NameOfOwner;
-        private string m_PhoneNumberOfOwner;
+        private readonly string m_NameOfOwner;
+        private readonly string m_PhoneNumberOfOwner;
         private eVechileState m_VechileState;
         private Vechile m_Vechile = null;
 
@@ -31,14 +32,14 @@ namespace Ex03.GarageLogic
 
         internal Vechile Vechile
         {
-            set
-            {
-                m_Vechile = value;
-            }
-
             get
             {
                 return m_Vechile;
+            }
+
+            set
+            {
+                m_Vechile = value;
             }
         }
 
@@ -54,6 +55,5 @@ namespace Ex03.GarageLogic
                 m_VechileState = value;
             }
         }
-
     }
 }

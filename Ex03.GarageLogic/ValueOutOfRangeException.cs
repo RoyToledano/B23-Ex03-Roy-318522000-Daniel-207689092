@@ -18,12 +18,8 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return "The argument entered is out of the range " + m_MinValue + " to " + m_MaxValue+".";
+                return "The argument entered is out of the range " + m_MinValue + " to " + m_MaxValue + ".";
             }
         }
     }
-
- 
-
-  
 }

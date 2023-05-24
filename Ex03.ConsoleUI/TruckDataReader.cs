@@ -3,20 +3,20 @@ using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
-    class TruckDataReader : DataReader
+    public class TruckDataReader : DataReader
     {
-        const float k_MaxFuelTank = 135;
-        const eFuelType k_TruckFuelType = eFuelType.Soler;
+        private const float k_MaxFuelTank = 135;
+        private const eFuelType k_TruckFuelType = eFuelType.Soler;
 
-        public override Object[] GetSpecificData()
+        public override object[] GetSpecificData()
         {
             int isToxic;
             bool isToxicStr;
-            Object[] truckArguments = new Object[2];
+            object[] truckArguments = new object[2];
 
             Console.WriteLine("If the truck carries dangerous material, type 1, else - type 0");
             isToxic = Utilities.GetSingleNumInRange(0, 1);
-            if (isToxic==1)
+            if (isToxic == 1)
             {
                 isToxicStr = true;
             }
@@ -24,6 +24,7 @@ namespace Ex03.ConsoleUI
             {
                 isToxicStr = false;
             }
+
             truckArguments[0] = isToxicStr;
             Console.WriteLine("Please enter the cargo volume");
             truckArguments[1] = Utilities.GetFloatNumber();
@@ -31,9 +32,9 @@ namespace Ex03.ConsoleUI
             return truckArguments;
         }
 
-        public override Object[] GetEngineData(eEngineTypes i_EngineType)
+        public override object[] GetEngineData(eEngineTypes i_EngineType)
         {
-            Object[] engineArguments = null;
+            object[] engineArguments = null;
 
             if (i_EngineType == eEngineTypes.Fuel)
             {
